@@ -1,0 +1,16 @@
+# Implemented test quality rubric
+
+Assess every row as Pass, Fail, Not assessed, or justified Not applicable for a full gate. Extend with sourced assignment obligations. Test categories, tools, thresholds, and approvals follow actual scope and authority.
+
+| Check | Pass condition |
+| --- | --- |
+| TRV1 — Authority and baseline | Current specification, reviewed implementation plan, analysis, reviewed category designs/test plan, canonical decisions, repository/local-change boundary, independence, and required approvals are established; material drift is reconciled. |
+| TRV2 — Specification outcomes and oracles | Every current in-scope FR/NFR, material AC, B obligation, significant I dependency, and applicable DoD outcome has adequate assertion/check evidence or a justified disposition. Expected results follow authoritative requirements; implementation behavior does not redefine them. |
+| TRV3 — Design and plan fidelity | Every assigned case, relevant TA/TC/TR/TD/TB record, planned existing-test action, verification-only check, setup task, and execution obligation reaches actual code/evidence or an owner-verified disposition. Material deviations receive required upstream revalidation; reverse tracing exposes unsupported expectations. |
+| TRV4 — Assertion sensitivity and boundaries | Setup reaches the intended behavior and assertions observe the intended outcomes. Mocks, stubs, helpers, asynchronous control, and error handling do not conceal material violations. Important negative paths can fail for the intended reason, rather than unrelated setup failure. |
+| TRV5 — Retained and replacement coverage | Retain/Extend/Modify/Replace/Run for regression actions preserve still-required assertions. Deduplication retains distinct required outcomes and observation boundaries; no-new-test and inspection dispositions have concrete evaluation evidence. |
+| TRV6 — Fixtures and reproducibility | Data, services, time/randomness, isolation, cleanup, environment controls, and any required independently approved visual references support the designed cases without introducing new product expectations or masking relevant behavior. |
+| TRV7 — Discovery and execution evidence | Configured runner/CI includes intended cases. Actual selection, commands, environment, results/skips/failures, and evidence limits establish required execution outcomes for this snapshot. Hidden skips, disabled tests, vacuous discovery, or material unresolved failures do not count as successful verification. |
+| TRV8 — Findings and review integrity | Separate spec/test-plan conclusions, precise findings and owners, responses, verified closure, history, inspection/execution limits, and required revalidation are recorded. Correct tests exposing product defects are distinguished from defective tests; unresolved material failures prevent full PASS. |
+
+For sensitivity, identify a concrete spec-violating implementation behavior and ask which actual assertion would catch it. An uncovered design flaw belongs to test-design/analysis; a missing or weakened implementation of an adequate design belongs to the test author. A runner failure without diagnosis does not establish either kind of defect. Code coverage can locate unexercised paths, but it cannot prove the correctness or strength of assertions.
