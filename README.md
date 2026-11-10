@@ -25,14 +25,14 @@ Run from the target project, replacing `morovid/skills-engineering` with this ch
 
 ```sh
 # List available skills
-npx skills add morovid/skills-engineering --list --full-depth
+npx skills add morovid/skills --list --full-depth
 
 # Install all skills for Codex
-npx skills add morovid/skills-engineering --skill '*' --agent codex --full-depth --yes
+npx skills add morovid/skills --skill '*' --agent codex --full-depth --yes
 
 # Install selected skills
-npx skills add morovid/skills-engineering --skill spec-intake spec-discovery --agent codex --full-depth --yes
+npx skills add morovid/skills --skill spec-intake spec-discovery --agent codex --full-depth --yes
 
 # Install all skills globally
-npx skills add morovid/skills-engineering --skill '*' --agent codex --full-depth --global --yes
+npx skills add morovid/skills --skill '*' --agent codex --full-depth --global --yes
 ```
