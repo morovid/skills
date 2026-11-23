@@ -1,6 +1,7 @@
 # Implementation Plan Review: <assignment>
 
-Round / report version: <round, revision, actual date if known>
+Round / report version: <Round N of 5 (plus any human-authorized extension), actual date if known>
+Reviewed fingerprints: <round tag and artifacts@sha; repo@sha (+diff hash for local changes)>
 Verdict: <PASS | REVISE | BLOCKED>
 Currency: <Current | Needs revalidation>
 Review boundary: <exact scope assessed this round, including changes and limits>
@@ -10,13 +11,13 @@ Roles and independence: <actual reviewer agent/session and evidence of separatio
 
 ## 1. Exact reviewed baseline
 
-| Input | Location and exact version | Readiness, currency, and limits |
+| Input | Location (at the reviewed artifacts@sha unless noted) | Readiness, currency, and limits |
 | --- | --- | --- |
-| `plan-code.md` (or assigned plan path) and supporting files | <paths/versions> | <submission and change boundary> |
-| Engineering specification and specification review package index | <paths/versions> | <Ready for engineering, Current, included catalogs, approvals only where required> |
-| Canonical catalogs / D/A/Q | <paths/versions/sections> | <authority and supersessions> |
-| Repository / instructions | <revision/snapshot, relevant local changes, instruction paths> | <inspection boundary, drift disposition, unavailable areas> |
-| Prior review / responses | <report round/version and author response locators, or None> | <changes and findings to recheck> |
+| `plan-code.md` (or assigned plan path) and supporting files | <paths> | <submission and change boundary> |
+| Engineering specification and specification review package index | <paths> | <Ready for engineering, Current, included catalogs, approvals only where required> |
+| Canonical catalogs / D/A/Q | <paths/sections> | <authority and supersessions> |
+| Repository / instructions | <repo@sha (+diff hash), instruction paths> | <inspection boundary, drift disposition, unavailable areas> |
+| Prior review / responses | <previous round tag and author response locators, or None> | <changes and findings to recheck> |
 
 ## 2. Quality checks
 
@@ -67,14 +68,14 @@ Flow/integration counterexamples: <inspected paths, relevant failures, conclusio
 | --- | --- | --- | --- | --- |
 | <round / REV ID> | <exact version and link to fix, disagreement, or upstream return> | <verified result and remaining condition> | <reason and count; exclude initial review/self-checks> | <continue, upstream return, stop affected loop, or closed> |
 
-Preserved rounds: <round, reviewer session, exact baseline, scope, verdict, and evidence or immutable reference for each prior round>
+Earlier rounds: <round tag, reviewer session, scope, and verdict for each prior round; their content is in the artifact repository history>
 
 ## 6. Verdict and next owner
 
 Round conclusion: <why the verdict follows from current applicable checks and findings>
 Open blockers / unassessed conditions: <affected IDs, missing source/decision/access, exact unblock action; or None>
 Nonblocking follow-up: <bounded actions, rationale, authority if required; or None>
-Next handoff: <planner revision and resubmission for REVISE, unblock owner for BLOCKED, or exact plan eligible for Ready for implementation on a Current full PASS>
+Next handoff: <fresh planner revision and resubmission for REVISE, unblock owner for BLOCKED, escalation to a human if round 5 ended without PASS, or exact plan eligible for Ready for implementation on a Current full PASS>
 Changed inputs / downstream revalidation: <versions/IDs, affected handoffs and required checks; or None>
 
 A PASS applies only to the exact reviewed technical content, source versions, and applicable repository baseline. It does not establish implemented behavior or successful tests.

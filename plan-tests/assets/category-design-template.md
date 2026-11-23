@@ -2,10 +2,10 @@
 
 Status: <In progress | Complete | Blocked>
 Currency: <Current | Needs revalidation>
-Design version: <version and actual date if known>
+Design version: <round tag of the latest submission, or Not yet submitted; actual date if known>
 Specialist: <actual agent identity; single assigned type and case prefix>
 Contributors: <actual drafting author and evidence helper identities, assigned scope and evidence locators; or None>
-Inputs: <exact assignment and supporting file versions; engineering specification and package review/index; production plan and matching readiness review; relevant repository revision/snapshot and local changes; cite the versioned handoff manifest where it records these. Optional inventory or revalidated legacy analysis is supporting evidence only.>
+Inputs: <assignment and supporting files, engineering specification and package review/index, production plan and matching readiness review, all at artifacts@sha; repo@sha (+diff hash for local changes). Optional inventory or revalidated legacy analysis is supporting evidence only.>
 Assigned scope: <TD/TA/TC/TR/TB, FR/NFR/AC/DoD, DES/IMP or equivalent; intended seams, affected consumers and exclusions>
 
 <!-- Adapt depth to the assignment. Remove unused rows/comments. Complete means the specialist finished its assigned design; it does not establish that the overall plan is Ready for test implementation. -->

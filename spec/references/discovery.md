@@ -96,7 +96,7 @@ Reuse behavior IDs from the change map. Keep detailed target behavior in the spe
 
 Use [the discovery report template](../assets/discovery-report-template.md) as the output starting point. It packages all five outputs, an evidence index, the intake handoff, and readiness findings in one document. Adapt tables and section depth to the assignment; omit irrelevant optional detail with a brief reason instead of filling empty tables. Keep missing information explicit.
 
-Save at the requested destination or follow the established assignment convention. Otherwise use `discovery-report.md` beside the brief, or in the assignment working directory when no brief exists. Inspect an existing destination before updating it so an unrelated assignment is not overwritten. Split the report into linked files only when the assignment's conventions or size justify it; retain one index with the readiness status.
+Save at the requested destination or follow the established assignment convention. Otherwise use `discovery-report.md` beside the brief, or in the assignment folder when no brief exists. Inspect an existing destination before updating it so an unrelated assignment is not overwritten. Split the report into linked files only when the assignment's conventions or size justify it; retain one index with the readiness status.
 
 Use stable IDs when records need cross-references: `E1` for evidence, `CB1` for current behavior, `I1` for impacts, and `B1` for proposed or preserved behavior. Continue inherited `D1`, `A1`, and `Q1` sequences for decisions, assumptions, and questions without renumbering or reusing identifiers. Follow existing assignment conventions when they differ.
 

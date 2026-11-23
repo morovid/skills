@@ -1,6 +1,6 @@
 # Implemented Test Review: <assignment>
 
-Round / report version: <round, version, actual date if known>
+Round / report version: <Round N of 5 (plus any human-authorized extension), version, actual date if known>
 Verdict: <PASS | REVISE | BLOCKED>
 Currency: <Current | Needs revalidation>
 Boundary: <Full gate | Limited; categories, areas, exclusions>
@@ -9,12 +9,12 @@ Workers: <identities, assigned scopes and evidence references; distinguish revie
 
 ## 1. Reviewed baseline
 
-| Input | Exact location / version / snapshot | Readiness, currency, and limits |
+| Input | Location and fingerprint (artifacts@sha or repo@sha) | Readiness, currency, and limits |
 | --- | --- | --- |
 | Specification, review index, catalogs, canonical decisions | <sources> | <authority and required approvals> |
 | Production implementation plan and review | <sources> | <readiness and drift reconciliation> |
 | Test implementation plan, applicable category designs, and matching independent review | <sources> | <Ready for test implementation; full PASS; Current; scope and no-new-test dispositions> |
-| Repository/instructions, production code, tests, fixtures, runner/CI | <revision/snapshot and local changes> | <inspection boundary, environment and reference versions> |
+| Repository/instructions, production code, tests, fixtures, runner/CI | <repo@sha (+diff hash)> | <inspection boundary, environment and reference versions> |
 | Prior test review / author responses | <sources> | <retained checks and revalidation> |
 
 ## 2. Quality checks

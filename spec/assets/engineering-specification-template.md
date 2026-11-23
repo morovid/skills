@@ -1,12 +1,12 @@
 # Engineering Specification: <assignment title>
 
-Status: <Draft—needs rework | Ready for engineering>
+Status: Ready for engineering
 Currency: <Current | Needs revalidation; prior readiness is unusable while revalidation is pending>
-Specification / package version: <specification version, package ID, and actual date if known>
-Review report: <stable report path, review round ID, and matching package ID; not a report content digest>
-Canonical catalogs: <included refinement/catalog versions; identify where normative definitions live>
+Package: <package ID and handoff tag `<assignment>/spec/r<N>-pass`; actual date if known>
+Review report: <report path and review round>
+Canonical catalogs: <included refinement/catalog paths; identify where normative definitions live>
 
-<!-- Assemble confirmed material without changing meaning or IDs. Link version-bound included catalogs instead of making competing definitions. Keep enough context here to avoid repeating discovery. Combine concise sections or omit irrelevant detail with a reason. Remove placeholders/comments from completed output. A draft must expose unresolved content and cannot imply approval. -->
+<!-- Write this file only in the final review round, after every other check passes; rounds that end in rework or a blocker don't create or update it. On a later run, update only the sections affected by the changes. Assemble confirmed material without changing meaning or IDs. Link included catalogs instead of making competing definitions. Keep enough context here to avoid repeating discovery. Combine concise sections or omit irrelevant detail with a reason. Remove placeholders/comments from completed output. -->
 
 ## 1. Purpose, scope, and sources
 
@@ -46,21 +46,20 @@ State/data lifecycle and cross-domain outcomes: <important ownership, transition
 - Canonical D/A/Q register: <exact location and included version; current decisions, resolutions, and supersession links>
 - Assumptions and open questions: <links in that register; no material unresolved choice in a ready specification>
 - Nonblocking follow-up: <bounded action and reason it cannot change scope, behavior, acceptance, or a mandatory gate; or None>
-- Draft blockers, if any: <RV/RW/Q IDs, affected content, and exact unblock action; None for Ready for engineering>
 
 ## 7. Traceability and quality validation
 
 Traceability: <included matrix version linking objective/scope and B/I/D/constraints through US/SC/FR/NFR to exact AC coverage, with justified N/A relationships>
 
-Review verdict and evidence: <links from the report backlink above to the quality verdict, assessed baseline, independent reviewer evidence, finding closure, and applicable approval evidence>
+Review verdict and evidence: <links into the review report above: the quality verdict, assessed baseline, independent reviewer evidence, finding closure, and applicable approval evidence>
 
 Assembly reconciliation: <source versions checked, semantic equivalence, link resolution, preservation/removal/NFR coverage, and omitted sections with reasons>
 
 ## 8. Engineering handoff package
 
-<Link the review report's authoritative package index by stable path and round/package IDs. The report pins the exact assembled specification and normative inputs; this backlink does not pin the report's content. List included catalogs or evidence here only when needed for navigation.>
+<Link the review report's package index. The handoff tag pins this specification, the report, and every normative input. List included catalogs or evidence here only when needed for navigation.>
 
-Readiness: <Ready for engineering only if the full review gate passes for these exact versions; otherwise Draft—needs rework with blocker links>
+Readiness: <Ready for engineering at the handoff tag, per the linked review report>
 
 Next action: <engineering planning and implementation, or exact earlier-stage/review task>
 

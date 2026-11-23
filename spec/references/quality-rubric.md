@@ -27,6 +27,8 @@ For QC9, assess relevance rather than adding every quality category. A categoric
 
 For QC13, independent review is mandatory for the full `spec` gate. Apply any additional project rules as sourced, not invented. Record independence against the reviewed authorship and versions. Several perspectives from the same author are useful self-checks, not evidence of reviewer independence. Reuse earlier independent evidence only within its demonstrated scope and version applicability.
 
+QC14 is assessed only in the final round, once every other check passes. In earlier rounds record it as **Not assessed — assembly deferred to the final round**; this is not a finding.
+
 For aggregate checks such as QC1 and QC16, retain the distinction between known defects and missing verification. A known dependency failure makes the aggregate Fail; an otherwise unverified dependency makes it Not assessed. Recording an open finding for missing evidence does not itself turn that uncertainty into a proven defect. An absent approval is unverified; evidence that the designated authority rejected this baseline is a Fail.
 
 ## Gate interpretation

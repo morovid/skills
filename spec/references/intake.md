@@ -39,7 +39,7 @@ State uncertainty when the request does not support a classification. Brevity al
 
 Use [the brief template and example](../assets/initial-assignment-brief.md) when writing the output. Keep simple briefs concise; use the same information categories without forcing long tables or empty sections.
 
-Save the brief at the requested destination or follow an established assignment artifact convention. If neither exists, use `initial-assignment-brief.md` in the assignment's working directory. Check an existing file before updating it so an unrelated assignment is not overwritten.
+Save the brief at the requested destination or follow an established assignment artifact convention. If neither exists, use `initial-assignment-brief.md` in the assignment folder. Check an existing file before updating it so an unrelated assignment is not overwritten.
 
 Keep the brief understandable without the chat history. Preserve the meaning of the original request and source references, separate confirmed scope from assumptions, and include open questions, provisional complexity, and a discovery handoff. Use stable identifiers for decisions, assumptions, and questions when they need to be referenced later.
 

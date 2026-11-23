@@ -1,7 +1,7 @@
 # Coverage Evidence: <assignment title>
 
-Plan: <stable plan path and assignment ID; the plan pins this appendix version>
-Repository baseline: <revision or reproducible snapshot, relevant local changes, environments and access limits>
+Plan: <stable plan path and assignment ID>
+Repository baseline: <repo@sha (+diff hash for local changes), environments and access limits>
 Investigation boundary: <searched paths, consumers, test fixtures, runner/CI selection, unavailable evidence>
 
 <!-- Optional evidence appendix only. Keep coverage decisions, risk dispositions, package assignments, traceability, and readiness in the plan; keep cases in the category designs. -->

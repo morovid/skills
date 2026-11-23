@@ -1,6 +1,6 @@
 # Security Review: <assignment>
 
-Round / report version: <round, version, actual date if known>
+Round / report version: <Round N of 5 (plus any human-authorized extension), version, actual date if known>
 Verdict: <PASS | REVISE | BLOCKED>
 Currency: <Current | Needs revalidation>
 Boundary: <Full gate | Limited; exact system/change scope and exclusions>
@@ -11,12 +11,12 @@ Workers: <identities, assigned scopes and evidence references; distinguish revie
 
 ## 1. Reviewed baseline and authority
 
-| Input | Exact location / version / snapshot | Readiness, authority, currency, and limits |
+| Input | Location and fingerprint (artifacts@sha or repo@sha) | Readiness, authority, currency, and limits |
 | --- | --- | --- |
 | Specification, review index, relevant catalogs, canonical decisions | <sources> | <confirmed obligations and required approvals> |
 | Implementation plan and plan review | <sources> | <readiness and drift reconciliation> |
 | Applicable security policy, threat model, selected external controls | <sources and exact versions> | <mandatory controls, exceptions authority, or no supplied policy> |
-| Repository/instructions, production code, dependency locks, build/config/deployment definitions | <revision/snapshot, paths, local changes> | <inspection boundary and environment assumptions> |
+| Repository/instructions, production code, dependency locks, build/config/deployment definitions | <repo@sha (+diff hash), paths> | <inspection boundary and environment assumptions> |
 | Relevant test plan/designs and their review, tests, code/test reviews, existing scan evidence | <sources and versions> | <established evidence and remaining limits> |
 | Prior security review / author responses | <sources and rounds> | <retained checks and required revalidation> |
 

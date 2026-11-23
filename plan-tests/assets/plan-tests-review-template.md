@@ -1,10 +1,10 @@
 # Test Plan Review: <assignment title>
 
-## Current round: <round ID and report version>
+## Current round: <Round N of 5 (plus any human-authorized extension) and report version>
 
 Verdict: <PASS / REVISE / BLOCKED>
 Currency: <Current | Needs revalidation>
-Reviewed baseline: <exact plan and linked file versions, engineering specification and package index, production plan and matching readiness review, repository revision/snapshot and relevant local changes>
+Reviewed baseline: <round tag and artifacts@sha (plan, designs, spec package, production plan and its review); repo@sha (+diff hash for local changes)>
 Reviewer and independence: <actual reviewer agent/session and evidence of separation from the lead, authors, author helpers, and all prior reviewer sessions for this plan>
 Scope and limits: <checked scope, repository/test/CI instructions and applicable approvals, inspected vs run, and changed boundary if rechecking>
 
@@ -33,7 +33,7 @@ Scope and limits: <checked scope, repository/test/CI instructions and applicable
 
 ## Round and recheck history
 
-Preserved rounds: <round, reviewer session, exact baseline, scope, verdict, and evidence or immutable reference for each prior round>
+Earlier rounds: <round tag, reviewer session, scope, and verdict for each prior round; their content is in the artifact repository history>
 
 | Finding / attempt | Author response / changed versions and IDs | Independent recheck and closure evidence | Remaining action / consecutive no-progress count |
 | --- | --- | --- | --- |
@@ -45,4 +45,4 @@ Verdict rationale: <why the current result follows from exact scope and evidence
 
 Required unblock actions or bounded follow-up: <exact actions/owners and affected IDs; or None>
 
-Next handoff: <exact plan and supporting paths/versions; planner revision and resubmission for REVISE, unblock owner for BLOCKED, or first work item on a Current full PASS; downstream revalidation if affected>
+Next handoff: <exact plan and supporting paths/versions; fresh planner revision and resubmission for REVISE, unblock owner for BLOCKED, escalation to a human if round 5 ended without PASS, or first work item on a Current full PASS; downstream revalidation if affected>

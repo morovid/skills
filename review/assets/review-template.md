@@ -1,7 +1,7 @@
 # Implementation Review: <assignment>
 
-Round / report version: <round, version, actual date if known>
-Reviewed snapshot: <revision or reproducible snapshot and relevant local changes>
+Round / report version: <Round N of 5 (plus any human-authorized extension), version, actual date if known>
+Reviewed snapshot: <repo@sha (+diff hash for local changes); upstream artifacts@sha>
 Boundary: <Full gate | Limited; scope and exclusions>
 Verdict: <PASS | REVISE | BLOCKED>
 Currency: <Current | Needs revalidation>
@@ -25,6 +25,6 @@ Authority and constraints: <exact spec, code plan, test plan/designs and review 
 
 Overall rationale: <why the verdict follows from the actual category reports and any unresolved contradictions>
 
-History / revalidation: <prior rounds and snapshot-bound verdicts; drift, affected evidence and owners; downstream invalidations>
+History / revalidation: <earlier rounds as artifact commits with their snapshot-bound verdicts; drift, affected evidence and owners; downstream invalidations>
 
-Handoff: <next owners, actions, and supporting report links; not authorization to release>
+Handoff: <next owners, actions, and supporting report links, or escalation to a human if round 5 ended without PASS; not authorization to release>

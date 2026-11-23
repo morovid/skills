@@ -1,20 +1,20 @@
 # Test Implementation Plan: <assignment title>
 
-Status: <In progress | Ready for test plan review | Ready for test implementation | Blocked at test planning>
+Status: <In progress | Ready for test plan review | Ready for test implementation | Blocked at test planning | Escalated to human>
 Currency: <Current | Needs revalidation>
-Plan version: <exact saved technical version and actual date if known>
-Readiness review: <plan-tests-review.md link to the current round and exact reviewed baseline; or Pending>
+Plan version: <round tag of the latest submission, or Not yet submitted; actual date if known>
+Readiness review: <plan-tests-review.md link and its current round tag; or Pending>
 
-<!-- Default package: plan-tests.md, plan-tests-review.md, and only the selected category files. Adapt depth and remove unused rows/comments. This plan indexes versioned supporting files; link authoritative cases rather than copying their definitions. A justified existing-check/inspection-only plan is valid and follows the same review loop. -->
+<!-- Default package: plan-tests.md, plan-tests-review.md, and only the selected category files. Adapt depth and remove unused rows/comments. This plan indexes its supporting files; link authoritative cases rather than copying their definitions. A justified existing-check/inspection-only plan is valid and follows the same review loop. -->
 
 ## 1. Inputs and scope
 
-| Source or supporting file | Exact path / version / locator | Authority or evidence | Readiness, currency and limits |
+| Source or supporting file | Path or locator (at artifacts@sha or repo@sha) | Authority or evidence | Readiness, currency and limits |
 | --- | --- | --- | --- |
-| Engineering specification and spec package index (`review-report.md` or equivalent) | <exact spec and review versions; linked catalogs, evidence and decision records with versions> | <authority for behavior and expected outcomes> | <Ready for engineering and Current for these versions; required approvals, if any> |
-| Production implementation plan and matching plan-code readiness review | <exact plan and review versions/round; linked material versions> | <intended logic, contracts, paths, consumers and dependencies; full PASS on the matching spec and relevant repository baseline> | <Ready for implementation and Current; discrepancies or required approvals> |
-| Repository baseline and rules | <revision or reproducible snapshot; relevant local changes; applicable instructions, code/consumers, tests, fixtures and CI locators> | <what exists now vs. planned or already implemented> | <access limits, material drift and effect on evidence> |
-| Test designs and supporting inventory/evidence | <exact version of each selected category file and each linked inventory/evidence file; use separate rows as needed> | <authoritative case locations and what the evidence establishes> | <inspection/execution limits and claim status> |
+| Engineering specification and spec package index (`review-report.md` or equivalent) | <spec and review paths at artifacts@sha; linked catalogs, evidence and decision records> | <authority for behavior and expected outcomes> | <Ready for engineering and Current at that commit; required approvals, if any> |
+| Production implementation plan and matching plan-code readiness review | <plan and review paths and round tag; linked material> | <intended logic, contracts, paths, consumers and dependencies; full PASS on the matching spec and relevant repository baseline> | <Ready for implementation and Current; discrepancies or required approvals> |
+| Repository baseline and rules | <repo@sha (+diff hash for local changes); applicable instructions, code/consumers, tests, fixtures and CI locators> | <what exists now vs. planned or already implemented> | <access limits, material drift and effect on evidence> |
+| Test designs and supporting inventory/evidence | <path of each selected category file and linked inventory/evidence file; use separate rows as needed> | <authoritative case locations and what the evidence establishes> | <inspection/execution limits and claim status> |
 
 Canonical D/A/Q register: <exact source; linked existing questions or proposed owning-stage updates>
 

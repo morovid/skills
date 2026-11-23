@@ -20,10 +20,16 @@ Use the full workflow for a feature, or start at the first missing or stale hand
 
 Resume with the saved artifacts and the missing decision, evidence, access, or correction; don't regenerate unchanged work. Equivalent artifacts can use different filenames. Review findings go back to the owner: implementation defects to authors; coverage or oracle gaps to `plan-tests`; infeasible design or contracts to `plan-code`; and ambiguous intent, scope, or requirements to `spec`. Revalidate affected handoffs before picking up dependent work. None of these skills authorizes merge, release, or deployment.
 
+## Artifacts
+
+Specs, plans, reviews, and implementation records stay out of the project repository. They live in a hidden local git repository, `.artifacts/` at the project root, which is excluded through `.git/info/exclude` and has no remote. Each assignment gets its own folder. The lead commits every submission and review, tags each round, and records fingerprints as `artifacts@<sha>` and `repo@<sha>`; rechecks start from the diff between round tags. See `references/artifact-repository.md` in any skill.
+
 ## Agent and check policy
 
-- **Match agent capability to the work.** Use the smallest capable model or agent for bounded searches, file reads, mechanical edits, and established checks. Use stronger agents for coordination, substantive decisions, and independent verification. If the host has no model selector, use the suitable agent type and scope the task narrowly. On hosts without nested delegation, the lead dispatches scoped work and relays the results.
+- **Match agent capability to the work.** Each skill names the subagent to use: `morovid-scout` (fast) for bounded searches and file reads, `morovid-scribe` (fast) for mechanical edits, `morovid-runner` (fast) for established checks, `morovid-author`, `morovid-designer`, and `morovid-coder` (standard) for authoring and implementation, and `morovid-reviewer` (strong) for independent verification. On hosts without these agents, use the closest available agent with a narrow handoff. On hosts without nested delegation, the lead dispatches scoped work and relays the results.
 - **Start each review and recheck in a fresh session.** Use saved artifacts, exact versions, and prior findings, not the author's or previous reviewer's conversation. No author, author-side helper, or lead can provide the independent verdict on their own work. A relay within the same active round isn't a new review. When required independence is unavailable, save progress and report the blocker.
+- **Start each draft and revision with a fresh author.** Never resume an earlier author session. The saved artifact, the review findings, and prior responses carry the context.
+- **Stop after five review rounds.** Every review loop (`spec`, `plan-code`, `plan-tests`, `review`) runs at most five rounds: the initial review plus four rechecks. If round 5 ends without a pass, the skill stops, marks the work **Escalated to human**, and reports the open findings and the decision needed. A person can authorize another five rounds. The stalled-loop guard can stop a loop sooner.
 - **Verify changes without repeating unchanged work.** The first assessment covers the applicable scope. On a revision, a fresh verifier checks the changes, finding closure, and dependencies and may reuse evidence shown to still apply. Share matching execution evidence across categories rather than running the same command repeatedly. Author checks and independent judgments serve different purposes.
 
 ## Older workflows
@@ -50,3 +56,27 @@ npx skills add morovid/skills --skill spec plan-code plan-tests implement review
 # Install all skills globally
 npx skills add morovid/skills --skill '*' --agent codex --full-depth --global --yes
 ```
+
+### OpenCode subagents
+
+The skills delegate to seven subagents by exact name (`morovid-scout`, `morovid-scribe`, `morovid-runner`, `morovid-author`, `morovid-designer`, `morovid-coder`, `morovid-reviewer`). Copy the agent files as they are, without renaming them:
+
+```sh
+# This project only
+mkdir -p .opencode/agents
+cp <path-to-skills>/agents/opencode/*.md .opencode/agents/
+
+# Or every project
+mkdir -p ~/.config/opencode/agents
+cp <path-to-skills>/agents/opencode/*.md ~/.config/opencode/agents/
+```
+
+Authors, coders, and reviewers start their own scouts, scribes, and runners, which OpenCode blocks by default. Allow one level of nesting with `experimental.subagent_depth: 2`. Copy `agents/opencode.jsonc` to `.opencode/opencode.jsonc` if you don't have one; otherwise add the key to your existing config:
+
+```jsonc
+{
+  "experimental": { "subagent_depth": 2 }
+}
+```
+
+Check with `opencode debug agents`. The agents use GitHub Copilot models; with another provider, change the `model` line in each file (`opencode models` lists what's available).

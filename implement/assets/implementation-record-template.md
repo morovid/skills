@@ -1,9 +1,9 @@
 # Implementation Record: <assignment>
 
 Status: <In progress / Awaiting review / Blocked / Implementation reviewed>
-Starting baseline: <repository, revision, relevant local changes, access limits>
-Submitted baseline: <exact revision or reproducible snapshot including local changes and outside-snapshot report paths>
-Inputs: <exact reviewed spec/package, code plan/review, test plan/review and linked designs; applicable repo rules>
+Starting baseline: <repo@sha (+diff hash for local changes), access limits>
+Submitted baseline: <repo@sha (+diff hash for local changes) submitted for review>
+Inputs: <reviewed spec package, code plan/review, test plan/review and linked designs at artifacts@sha; applicable repo rules>
 Review: <stable report path, round and exact snapshot, or pending; report owns findings and verdict>
 
 ## Work and integration

@@ -1,12 +1,12 @@
 # Specification Review Report: <assignment title>
 
-Status: <In progress | Needs rework | Blocked at review | Limited review complete | Ready for engineering>
+Status: <In progress | Needs rework | Blocked at review | Escalated to human | Limited review complete | Ready for engineering>
 Currency: <Current | Needs revalidation; prior readiness is unusable while revalidation is pending>
 Quality verdict: <Meets quality requirements | Does not meet quality requirements | Not established>
 Review scope: <Full review, assembly, and readiness gate | Limited; exact assessed boundary>
-Review round / date: <identifier and actual date>
+Review round / date: <Round N of 5 (plus any human-authorized extension) and actual date>
 Package ID: <same stable ID as in the assembled specification, or Not assembled>
-Reviewed baseline: <links to the exact input inventory and, when assembled, the package index>
+Reviewed baseline: <round tag and artifacts@sha; repo@sha (+diff hash); see the input inventory and, when assembled, the package index>
 Engineering readiness: <Ready for engineering | Not ready | Not established by limited review>
 
 <!-- Replace placeholders, remove these comments and unused example records. Keep explicit assessment/disposition for all QC checks in a full review. N/A needs a reason; missing evidence is Not assessed. Retain finding IDs and history across rounds. A limited review cannot establish overall readiness. -->
@@ -25,12 +25,12 @@ Engineering readiness: <Ready for engineering | Not ready | Not established by l
 
 ### Input inventory and upstream gates
 
-| Artifact / role | Location and exact version/revision or package pin link | Claimed stage status and currency | Verified applicability / actual remaining gap |
+| Artifact / role | Path (at the reviewed artifacts@sha) | Claimed stage status and currency | Verified applicability / actual remaining gap |
 | --- | --- | --- | --- |
 | Intake brief or equivalent request | <source> | <stage status; Current / Needs revalidation> | <objective, scope, and changes checked; evidence or finding IDs> |
 | Discovery or equivalent behavioral handoff | <source> | <stage status; Current / Needs revalidation> | <behavior, impacts, evidence, and decision currency> |
 | Refinement or equivalent catalogs | <source> | <stage status; Current / Needs revalidation> | <catalog completeness and source alignment> |
-| Prior review / rework, if any | <prior review round and rework source or None> | <prior verdict and open IDs> | <what remains applicable and what changed> |
+| Prior review / rework, if any | <prior round tag and rework source, or None> | <prior verdict and open IDs> | <what remains applicable and what changed> |
 
 ### Supplemental evidence
 
@@ -59,7 +59,7 @@ Engineering readiness: <Ready for engineering | Not ready | Not established by l
 | QC11 — Bidirectional traceability | <result> | <evidence> | <IDs or None> |
 | QC12 — Logical and cross-artifact consistency | <result> | <evidence> | <IDs or None> |
 | QC13 — Independent validation | <result> | <reviewer/version/coverage evidence or gap> | <IDs or None> |
-| QC14 — Assembly completeness and usability | <result> | <assembled version and reconciliation> | <IDs or None> |
+| QC14 — Assembly completeness and usability | <result> | <assembled version and reconciliation, or Not assessed — assembly deferred to the final round> | <IDs or None> |
 | QC15 — Applicable approvals | <result> | <approval requirement and evidence or sourced N/A> | <IDs or None> |
 | QC16 — Final package and finding closure | <result> | <package baseline and resolution evidence> | <IDs or None> |
 | <supplied obligation ID, if additional> | <result> | <authority and evaluation> | <IDs or None> |
@@ -116,6 +116,8 @@ Unchanged material that remains usable: <confirmed records and limits of reuse>
 
 Re-review boundary: <what must be rechecked and why; changed versions and affected dependencies>
 
+Round limit: <rounds used of 5; if round 5 ends without Ready for engineering, Escalated to human with the decision or input needed; record any human authorization for more rounds; or Not reached>
+
 ### Review-only attempt history (when no rework packet exists)
 
 Count consecutive unsuccessful review rechecks of the same blocking finding without material progress; exclude the original review and author self-checks. Progress requires satisfying a closure condition or materially narrowing the cause with evidence that supports a concrete next correction. Wording, version, ID, stage, or session changes do not reset the count.
@@ -130,7 +132,7 @@ Resume evidence, if any: <documented change addressing the blocker and enabled n
 
 ## 5. Assembly and final readiness gate
 
-Engineering specification: <link to pinned assembly in the package index, or Not assembled and reason>
+Engineering specification: <link to pinned assembly in the package index, or Not assembled: written only in the final round once every other check passes>
 Assembly reconciliation: <source baselines, semantic equivalence, resolved links, retained obligations, and justified omissions>
 
 Readiness prerequisites (use the linked results; do not score them again):
@@ -148,15 +150,17 @@ Residual nonblocking follow-up: <bounded action, source/person if known, and why
 
 ### Package index
 
-Report identity: <stable report path, review round ID, and package ID; do not include a digest of this report>
+Report identity: <stable report path, review round, and package ID>
+Reviewed submission: <round tag and artifacts@sha of the submitted package; repo@sha (+diff hash) of the project>
+Handoff: <for Ready for engineering, the lead commits this report with the engineering specification and tags that commit `<assignment>/spec/r<N>-pass`; downstream stages cite that tag>
 
-<!-- Pin the exact assembled specification and all normative inputs with immutable file revisions or content digests. The specification's report backlink uses the report identity above, never the report's digest. If a pinned artifact changes, recheck the affected conditions before reporting readiness for the new version. -->
+<!-- The artifact repository commit pins every artifact, so list paths only. If an artifact changes after the reviewed commit (apart from status fields), recheck the affected conditions before reporting readiness for the new version. -->
 
-| Artifact | Location and revision / digest (as applicable) | Role and authority | Currency |
+| Artifact | Path | Role and authority | Currency |
 | --- | --- | --- | --- |
-| Engineering specification | <exact path and immutable revision or content digest, or Not assembled> | <assembled specification for this round/package> | <Current / Needs revalidation> |
-| <normative input; one row per source brief/request, discovery handoff, canonical catalog, D/A/Q register, or other applicable input> | <exact path or source locator and immutable revision or content digest> | <which scope, decisions, behavior, obligations, or acceptance conditions this input governs> | <Current / Needs revalidation> |
-| <supporting evidence, rework history, or approval evidence, if applicable> | <locator and relevant version or record ID> | <evidence, resolved history, or approval applicability> | <Current / Needs revalidation / Historical> |
+| Engineering specification | <path, or Not assembled> | <assembled specification for this package> | <Current / Needs revalidation> |
+| <normative input; one row per source brief/request, discovery handoff, canonical catalog, D/A/Q register, or other applicable input> | <path, or external source locator with its own version> | <which scope, decisions, behavior, obligations, or acceptance conditions this input governs> | <Current / Needs revalidation> |
+| <supporting evidence, rework history, or approval evidence, if applicable> | <locator or record ID> | <evidence, resolved history, or approval applicability> | <Current / Needs revalidation / Historical> |
 
 Next owner and action: <lead routes the packet to its owning phase in spec, review-local unblock action, or Engineering planning>
 

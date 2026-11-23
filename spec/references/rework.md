@@ -17,3 +17,5 @@
 ## Respect the stalled-loop guard
 
 Read the shared attempt history before retrying. After two consecutive unsuccessful review rechecks of the same blocking finding without material progress (excluding the original review and author self-checks), stop that correction path. Keep independent work going and save the affected phase's blocker report with attempted fixes, affected records, and exact unblock action. Changing phases, task IDs, or sessions does not reset the count. Resume only when new evidence, a confirmed decision, restored access, or another documented change addresses the blocker. Record why it permits a different action; review records recheck outcomes and manages the count.
+
+The round limit in [SKILL.md](../SKILL.md#round-limit) also applies: after five review rounds without **Ready for engineering**, stop and escalate to a human instead of starting another correction.

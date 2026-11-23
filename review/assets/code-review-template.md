@@ -1,6 +1,6 @@
 # Production Code Review: <assignment>
 
-Round / report version: <round, version, actual date if known>
+Round / report version: <Round N of 5 (plus any human-authorized extension), version, actual date if known>
 Verdict: <PASS | REVISE | BLOCKED>
 Currency: <Current | Needs revalidation>
 Boundary: <Full gate | Limited; exact scope and exclusions>
@@ -9,11 +9,11 @@ Workers: <identities, assigned scopes and evidence references; distinguish revie
 
 ## 1. Reviewed baseline
 
-| Input | Exact location / version / snapshot | Readiness, currency, and limits |
+| Input | Location and fingerprint (artifacts@sha or repo@sha) | Readiness, currency, and limits |
 | --- | --- | --- |
 | Specification, review index, catalogs, canonical decisions | <sources> | <authority and required approval evidence> |
 | Implementation plan and plan review | <sources> | <verdict and drift reconciliation> |
-| Repository, instructions, relevant configuration | <revision/snapshot, local changes, paths> | <inspection boundary and environment> |
+| Repository, instructions, relevant configuration | <repo@sha (+diff hash), paths> | <inspection boundary and environment> |
 | Prior code review and author responses | <sources> | <retained checks and revalidation> |
 
 ## 2. Quality checks

@@ -1,21 +1,21 @@
 # Implementation Plan: <assignment>
 
-Status: <In progress | Ready for implementation review | Blocked at implementation planning | Ready for implementation>
+Status: <In progress | Ready for implementation review | Blocked at implementation planning | Escalated to human | Ready for implementation>
 Currency: <Current | Needs revalidation>
-Plan version: <revision and actual date if known>
+Plan version: <round tag of the latest submission, or Not yet submitted; actual date if known>
 Authors / planning helpers: <planner and contributor identities/roles>
-Readiness review: <plan-code-review.md link to the current round and exact reviewed baseline; or Pending>
+Readiness review: <plan-code-review.md link and its current round tag; or Pending>
 
-<!-- Scale sections to the change; link large supporting files from this index with their versions. Preserve stable IDs and history. Remove placeholders/comments from completed outputs. -->
+<!-- Scale sections to the change; link large supporting files from this index. Preserve stable IDs and history. Remove placeholders/comments from completed outputs. -->
 
 ## 1. Sources, scope, and baseline
 
-| Input | Location and exact version | Authority / readiness / limits |
+| Input | Location and fingerprint (artifacts@sha or repo@sha) | Authority / readiness / limits |
 | --- | --- | --- |
-| Engineering specification | <path/version> | <Ready for engineering; currency> |
-| Specification review package index | <review-report path/version> | <included catalogs, full verdict, independence and mandated approvals> |
-| Canonical catalogs and D/A/Q register | <paths/versions/sections> | <current records, supersessions, limits> |
-| Repository and instructions | <repository, revision/snapshot, instruction paths, relevant local changes> | <inspection boundary and drift disposition> |
+| Engineering specification | <path at artifacts@sha> | <Ready for engineering; currency> |
+| Specification review package index | <review-report path at artifacts@sha> | <included catalogs, full verdict, independence and mandated approvals> |
+| Canonical catalogs and D/A/Q register | <paths/sections> | <current records, supersessions, limits> |
+| Repository and instructions | <repo@sha (+diff hash for local changes), instruction paths> | <inspection boundary and drift disposition> |
 
 Objective, actors, scope/exclusions, and supplied constraints: <source-linked summary>
 Submission change boundary: <prior and current versions, changed IDs/sections and supersessions; or Initial submission>

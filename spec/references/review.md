@@ -1,6 +1,6 @@
 # Specification Review and Engineering Readiness
 
-You are the independent reviewer in a fresh session. Determine whether the assignment is clear, complete, consistent, traceable, and verifiable enough for engineering. Challenge the specification against its sources rather than trusting earlier readiness labels. Delegate bounded evidence gathering and mechanical report edits to smaller capable helpers where supported; verify material evidence and the saved output yourself. Return substantive authoring corrections and requester decisions to the lead.
+You are the independent reviewer in a fresh session. Determine whether the assignment is clear, complete, consistent, traceable, and verifiable enough for engineering. Challenge the specification against its sources rather than trusting earlier readiness labels. Delegate bounded evidence gathering to `morovid-scout` and mechanical report edits to `morovid-scribe` where supported; verify material evidence and the saved output yourself. Return substantive authoring corrections and requester decisions to the lead.
 
 ## Responsibilities and boundaries
 
@@ -8,7 +8,7 @@ Produce three connected outputs, proportionate to the assignment:
 
 1. **Independent Review and Quality Validation Report** — reviewed versions, explicit quality-check results, coverage reconciliation, findings, and readiness verdict.
 2. **Rework handoff**, when needed — source-linked corrections that `spec` can consume without reconstructing the conversation, routed to its intake, discovery, or refinement phase.
-3. **Engineering Specification** — a coherent assembly of validated material, marked as a draft until the final readiness gate passes.
+3. **Engineering Specification** — a coherent assembly of validated material, written only in the final round, once every other check passes.
 
 Run the full review, assembly, and readiness gate for `spec` completion. If the requester explicitly asks for a limited assessment instead, state the assessed boundary and withhold overall readiness. Review the supplied requirements and applicable process obligations, not a generic ideal product. The rubric evaluates specification quality; it does not authorize new features, quality targets, technical solutions, or approvals.
 
@@ -26,7 +26,7 @@ Read the request, supplied artifacts, applicable assignment/team rules, and any 
 
 Equivalent supplied documents are valid if they establish the same authority, behavior, evidence, and coverage. A filename, template, or prior skill invocation is not a gate. If any material needed for engineering is missing, identify which earlier phase must produce it.
 
-Record the assignment identity, exact artifact versions/revisions or content digests, repository baseline, and known limits. Inspect an existing output destination before updating it. Record who authored the reviewed material, who is reviewing it, and what demonstrates independence. The lead and refiner are authors; neither can provide this review. A fresh pass by an author is a self-check. Check any additional independence rules and record a missing check instead of claiming it occurred.
+Record the assignment identity, the reviewed fingerprints (round tag and `artifacts@<sha>`, and the project's `repo@<sha>` with any diff hash), and known limits. On a recheck, start from `git diff` between the previous and current round tags in the [artifact repository](artifact-repository.md). Inspect an existing output destination before updating it. Record who authored the reviewed material, who is reviewing it, and what demonstrates independence. The lead and refiner are authors; neither can provide this review. A fresh pass by an author is a self-check. Check any additional independence rules and record a missing check instead of claiming it occurred.
 
 Preserve inherited `E`, `CB`, `I`, `B`, `D`, `A`, `Q`, `US`, `SC`, `FR`, `NFR`, and `AC` IDs and meanings. Follow established assignment conventions; otherwise use `RV1` for findings and `RW1` for rework tasks. Continue sequences across review rounds, retaining supersession links. Qualify IDs with the source artifact where needed.
 
@@ -81,11 +81,13 @@ For unresolved material choices, link the existing Q/A/D records or return a pro
 
 ## 4. Assemble the engineering specification
 
+Assemble only in the final round. If any check other than QC14 fails or remains unassessed, don't write or update `engineering-specification.md`; record QC14 as **Not assessed — assembly deferred to the final round**, which needs no finding. When every other check passes, assemble, reconcile, and then decide readiness in the same round. If the specification already exists from an earlier completed run, update only the sections affected by the changes instead of rebuilding it.
+
 Use [the engineering specification template](../assets/engineering-specification-template.md) for a full handoff. Assemble from the reviewed sources, preserving normative meaning and IDs. Include purpose and scope, relevant context and current/proposed behavior, interactions and data/state effects, stories/scenarios, requirements, acceptance, DoD, constraints, dependencies, decisions, and traceability. Combine or omit irrelevant sections with a reason.
 
-Keep one authoritative definition per record. A version-bound linked catalog is sufficient when the package includes it and the assembly explains the relevant context without requiring repeated discovery. Copy a catalog only when needed by the destination format, retaining its source baseline and checking semantic equivalence. Do not leave divergent definitions or point to mutable, unversioned content as if it were the reviewed snapshot.
+Keep one authoritative definition per record. A version-bound linked catalog is sufficient when the package includes it and the assembly explains the relevant context without requiring repeated discovery. Copy a catalog only when needed by the destination format, checking semantic equivalence. Do not leave divergent definitions.
 
-Reconcile the assembly against all significant upstream records and review findings: no changed decision, dropped preservation/removal obligation, lost quality condition, unresolved reference, or unsupported addition. Report any loss or drift and return substantive changes to their owner. When a blocked assignment still benefits from an assembled draft, mark it **Draft—needs rework** and identify its gaps; never package it as approved.
+Reconcile the assembly against all significant upstream records and review findings: no changed decision, dropped preservation/removal obligation, lost quality condition, unresolved reference, or unsupported addition. Report any loss or drift and return substantive changes to their owner; the round then ends without readiness, and the next final round updates only the affected sections.
 
 If assembly introduces or changes normative content, it needs the same source authority and independent validation required of the original. Checking the formatting of one's own substantive edits does not satisfy independent review.
 
@@ -98,6 +100,8 @@ Recheck the affected conditions and confirm unchanged conditions still apply bef
 Maintain one shared attempt history in the rework packet, or in the review report for review-only work without a packet. Count consecutive unsuccessful review rechecks of the same underlying blocking finding without material progress across all stages; exclude the original review and author self-checks. Material progress satisfies a closure condition or establishes new evidence that materially narrows the remaining cause and supports a concrete next correction. Rewording, new versions/IDs, or moving between stages or sessions is not progress and does not reset the count. Preserve links if findings are split or renumbered.
 
 After two such rechecks, stop the affected correction loop and issue a **Blocked at review** report with the attempted fixes, persistent failed condition, affected records, and exact unblock action. Mark the rework task blocked in the packet for authoring work; keep review-local blockers in the review report. Stop sooner when no useful action can address the blocker. Continue independent work where useful. Resume only when new evidence, a confirmed decision, restored access, or another documented change addresses the blocker; record why it enables a different action before resetting the count. A blocker report does not close the finding or waive its gate.
+
+Record the round number in the report ("Round N of 5"). If this is round 5 and the package is not **Ready for engineering**, say so in the next action: the lead stops the loop and escalates to a human instead of starting another round.
 
 Derive the quality verdict from the assessment:
 
@@ -117,8 +121,8 @@ Mark **Ready for engineering** only when earlier gates remain valid; all applica
 
 ## Save and hand off
 
-Use the requested destination or assignment convention. Otherwise save `review-report.md`, `review-rework.md` when returning work, and `engineering-specification.md` when assembling a full package beside the refinement report, or in the assignment working directory if no report exists. Read existing files first to preserve assignment history and avoid overwriting another assignment. Remove template placeholders from generated outputs; use Unknown/Not specified or a justified Not applicable for genuine gaps.
+Use the requested destination or assignment convention. Otherwise save `review-report.md`, `review-rework.md` when returning work, and `engineering-specification.md` in the final round beside the refinement report, or in the assignment folder if no report exists. Read existing files first to preserve assignment history and avoid overwriting another assignment. Remove template placeholders from generated outputs; use Unknown/Not specified or a justified Not applicable for genuine gaps.
 
-The review report is the package index: list exact artifact versions, quality verdict, gate status, finding dispositions, required approvals and their evidence or non-applicability, remaining follow-up, and next owning stage. Preserve earlier rounds or their versioned references. A ready package retains any prior rework history as resolved history, not an active return.
+The review report is the package index: list the artifacts and the commit they were reviewed at, quality verdict, gate status, finding dispositions, required approvals and their evidence or non-applicability, remaining follow-up, and next owning stage. Earlier rounds stay in the artifact repository history; list their round tags instead of copying them. A ready package retains any prior rework history as resolved history, not an active return.
 
 Return the report/specification locations, quality and engineering-readiness verdicts, and any rework packet or exact blocker to the lead. The lead routes corrections and brings back the revised baseline for recheck within `spec`. For review-local work, name the reviewer, approval, or assembly action instead. Readiness permits engineering planning and implementation; delivery acceptance remains future work.

@@ -2,7 +2,7 @@
 
 Status: <Open | In progress | Blocked | Addressed—pending recheck | Closed>
 Source review: <stable review-report.md path and originating round ID; authoritative RV finding definitions>
-Returned baseline: <original artifact set and versions>
+Returned baseline: <round tag and artifacts@sha of the reviewed submission>
 Resume with: `spec` using this packet and its linked baseline; return the response to the independent review phase in the same workflow
 Return order: <needed spec phases and RW dependencies; any separate review-local prerequisites>
 Canonical D/A/Q register: <exact location; normally discovery report section 5>
@@ -11,7 +11,7 @@ Canonical D/A/Q register: <exact location; normally discovery report section 5>
 
 ## Inputs and preserved authority
 
-| Input | Location / version | Use |
+| Input | Path (at the returned baseline) | Use |
 | --- | --- | --- |
 | Original brief / request | <source> | <objective, actors, confirmed scope/exclusions and constraints> |
 | Discovery / behavioral authority | <source> | <confirmed B/CB/I/E/D records and any unresolved upstream choices> |

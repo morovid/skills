@@ -96,7 +96,7 @@ Keep decisions, assumptions, and questions distinct. Link the assignment's canon
 
 When refinement reveals a changed decision or discovery gap, identify the exact upstream correction for the lead. Revalidate assigned refinement records against the supplied baseline. Report any downstream artifacts whose readiness or version-bound approvals must be revalidated, including affected IDs, versions, and required checks, without editing those artifacts. Track currency separately from stage status, and restore **Current** for the assigned output only after its affected gates pass. Link to detailed upstream evidence instead of maintaining competing copies of the baseline or confirmed specification.
 
-Save at the requested destination or follow the assignment convention. Otherwise use `refinement-report.md` beside the discovery report, or in the assignment working directory when no report file exists. Inspect an existing destination before updating it so an unrelated assignment is not overwritten. Split large catalogs into linked files only when useful, retaining one index with the overall status and input versions.
+Save at the requested destination or follow the assignment convention. Otherwise use `refinement-report.md` beside the discovery report, or in the assignment folder when no report file exists. Inspect an existing destination before updating it so an unrelated assignment is not overwritten. Split large catalogs into linked files only when useful, retaining one index with the overall status and input versions.
 
 ## Completion and review handoff
 
