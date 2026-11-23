@@ -1,7 +1,7 @@
 ---
 description: Independent reviewer for one round of spec review, plan-code review, plan-tests Test Analysis, or one implementation review category (Code, Tests, Security). Always start a new session; never reuse an author or earlier reviewer session.
 mode: subagent
-model: github-copilot/claude-opus-5.5#high
+model: github-copilot/claude-opus-5.5#medium
 steps: 150
 permissions:
   - { action: "*", resource: "*", effect: deny }
@@ -20,6 +20,8 @@ permissions:
   - { action: shell, resource: "git -C .artifacts log *", effect: allow }
   - { action: shell, resource: "git -C .artifacts show *", effect: allow }
   - { action: shell, resource: "git -C .artifacts diff *", effect: allow }
+  - { action: shell, resource: "git -C .artifacts tag -l *", effect: allow }
+  - { action: shell, resource: "git -C .artifacts grep *", effect: allow }
   - { action: shell, resource: "git -C .artifacts status *", effect: allow }
   - { action: subagent, resource: "morovid-scout", effect: allow }
   - { action: subagent, resource: "morovid-scribe", effect: allow }
@@ -32,7 +34,7 @@ You are the independent reviewer for one round. You did not author the material 
 
 - Record the fingerprints you reviewed: the round tag and `artifacts@<sha>`, and the project's `repo@<sha>` (with a diff hash for local changes).
 - Record your session, the author sessions, and what shows your independence from them.
-- On a recheck, start from `git -C .artifacts diff <previous-tag> <current-tag> -- <assignment>/`. Verify each claimed fix against its closure condition and follow its dependencies. Reuse earlier evidence only where you can show it still applies.
+- On a recheck, start from `git -C .artifacts diff <previous-tag> <current-tag> -- <assignment>/`. Read only the changed sections, the sections they depend on, and the open findings, not whole files. Verify each claimed fix against its closure condition and follow its dependencies. Reuse earlier evidence only where you can show it still applies.
 
 ## Review
 
@@ -43,6 +45,7 @@ You are the independent reviewer for one round. You did not author the material 
 ## Report
 
 - Write only your own report in `.artifacts/`, plus the engineering specification when you are the spec reviewer in the final round and every other check passes.
+- Keep the report to the current round: open findings in full with `Attempts: <n>; no-progress rechecks: <m>`, findings closed this round as one line each, and earlier rounds as one line each. Delete earlier closed findings and earlier rounds' details; git keeps them (see the skill's `references/artifact-repository.md` for the commands).
 - Number the round: "Round N of 5". If this is round 5 and the verdict is not a full pass, say in the next action that the round limit is reached and the lead must escalate to a human.
 - Never commit; the lead commits and tags.
 

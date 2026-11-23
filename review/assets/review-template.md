@@ -25,6 +25,8 @@ Authority and constraints: <exact spec, code plan, test plan/designs and review 
 
 Overall rationale: <why the verdict follows from the actual category reports and any unresolved contradictions>
 
-History / revalidation: <earlier rounds as artifact commits with their snapshot-bound verdicts; drift, affected evidence and owners; downstream invalidations>
+Earlier rounds: <one line per round: tag — verdict, open findings; earlier details stay in the artifact repository history>
+
+Revalidation: <drift, affected evidence and owners; downstream invalidations>
 
 Handoff: <next owners, actions, and supporting report links, or escalation to a human if round 5 ended without PASS; not authorization to release>

@@ -8,7 +8,7 @@ Reviewed baseline: <round tag and artifacts@sha (plan, designs, spec package, pr
 Reviewer and independence: <actual reviewer agent/session and evidence of separation from the lead, authors, author helpers, and all prior reviewer sessions for this plan>
 Scope and limits: <checked scope, repository/test/CI instructions and applicable approvals, inspected vs run, and changed boundary if rechecking>
 
-<!-- Record one round per submitted baseline, with a fresh independent reviewer. This report owns findings, round verdicts, and recheck history across revisions. Remove placeholders/comments in completed output. -->
+<!-- Record one round per submitted baseline, with a fresh independent reviewer. This report owns findings and the current verdict. Keep it to the current round: open findings in full, closed-this-round and earlier rounds as one line each; earlier details stay in the artifact repository history. Remove placeholders/comments in completed output. -->
 
 ## Assessment
 
@@ -27,17 +27,15 @@ Scope and limits: <checked scope, repository/test/CI instructions and applicable
 
 ## Findings
 
-| Finding ID / severity | Failed or unassessed check / affected IDs | Exact evidence, claim status, limits and consequence | Owner / required action and observable closure condition | Current disposition |
+| Finding ID / severity | Failed or unassessed check / affected IDs | Exact evidence, claim status, limits and consequence | Owner / required action and observable closure condition | Disposition / attempts |
 | --- | --- | --- | --- | --- |
-| <assignment convention, otherwise DR-1; Blocking / Major / Minor> | <check and records> | <source/case/task and repository locators> | <owning phase; exact fix or unblock action> | <Open / Corrected / Blocked / justified follow-up; round/recheck pointer> |
+| <assignment convention, otherwise DR-1; Blocking / Major / Minor> | <check and records> | <source/case/task and repository locators> | <owning phase; exact fix or unblock action> | <Open / Reopened / Blocked / justified follow-up; Attempts: n; no-progress rechecks: m> |
 
-## Round and recheck history
+## Rounds
 
-Earlier rounds: <round tag, reviewer session, scope, and verdict for each prior round; their content is in the artifact repository history>
+Closed this round: <one line per finding: ID — closure evidence; or None>
 
-| Finding / attempt | Author response / changed versions and IDs | Independent recheck and closure evidence | Remaining action / consecutive no-progress count |
-| --- | --- | --- | --- |
-| <finding/round; initial review not a recheck> | <link to versioned fix, disagreement, or upstream return; changed IDs and versions> | <actual evidence and result; reviewer identity> | <open/reopened/blocked/closed; owner and action> |
+Earlier rounds: <one line per round: tag — verdict, open findings. Don't copy earlier details; read them with `git -C .artifacts grep -n -A 30 '<finding ID>' <tag> -- <path>`>
 
 ## Verdict and handoff
 

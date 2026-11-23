@@ -58,14 +58,18 @@ Execution conclusion: <what ran, what remains unverified, required next evidence
 
 ## 6. Rechecks and verdict
 
-| Round / finding | Submitted snapshot / response | Recheck evidence and result | Material progress / unsuccessful recheck count | Next action |
+| Open finding | Submitted snapshot / response | This round's recheck evidence | Attempts; no-progress rechecks | Next action |
 | --- | --- | --- | --- | --- |
-| <round / ID> | <version / locator> | <closure or remaining condition> | <reason/count> | <owner/action> |
+| <ID> | <repo@sha / response locator> | <closure or remaining condition> | <n; m> | <owner/action> |
+
+Closed this round: <one line per finding: ID — closure evidence; or None>
+
+Earlier rounds: <one line per round: tag — verdict, open findings. Don't copy earlier details; read them with `git -C .artifacts grep -n -A 30 '<finding ID>' <tag> -- <path>`>
 
 Specification conclusion: <supported outcomes, oracle defects, coverage gaps and unassessed obligations>
 Test-plan conclusion: <implemented coverage, existing-test actions, deviations and reconciliation>
 Gate rationale: <why verdict follows; required execution and minor follow-up dispositions>
 Blockers / next owner: <exact action and evidence; or None>
-History / revalidation: <prior version-bound verdicts, retained evidence, affected downstream versions/IDs and required checks>
+Revalidation: <evidence reused from earlier rounds and why it still applies; affected downstream versions/IDs and required checks>
 
 PASS is bound to this test/source/product snapshot and scope. It does not replace production-code review or release acceptance.

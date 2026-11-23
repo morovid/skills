@@ -53,14 +53,18 @@ Reverse scope check and inspected flows: <unsupported changes, consumers/failure
 
 ## 6. Rechecks and verdict
 
-| Round / finding | Submitted snapshot / response | Recheck evidence and result | Material progress / unsuccessful recheck count | Next action |
+| Open finding | Submitted snapshot / response | This round's recheck evidence | Attempts; no-progress rechecks | Next action |
 | --- | --- | --- | --- | --- |
-| <round / ID> | <version / locator> | <closure or remaining condition> | <reason/count> | <owner/action> |
+| <ID> | <repo@sha / response locator> | <closure or remaining condition> | <n; m> | <owner/action> |
+
+Closed this round: <one line per finding: ID — closure evidence; or None>
+
+Earlier rounds: <one line per round: tag — verdict, open findings. Don't copy earlier details; read them with `git -C .artifacts grep -n -A 30 '<finding ID>' <tag> -- <path>`>
 
 Specification conclusion: <supported conformity, defects, and unassessed obligations>
 Plan conclusion: <supported conformity, deviations, and reconciliation>
 Gate rationale: <why verdict follows; minor follow-up disposition>
 Blockers / next owner: <exact action and evidence; or None>
-History / revalidation: <prior version-bound verdicts, retained evidence, affected downstream versions/IDs and required checks>
+Revalidation: <evidence reused from earlier rounds and why it still applies; affected downstream versions/IDs and required checks>
 
 PASS is bound to this production-code/source snapshot and review boundary. It does not independently establish test adequacy or release acceptance.

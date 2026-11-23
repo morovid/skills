@@ -7,7 +7,7 @@ Currency: <Current | Needs revalidation>
 Review boundary: <exact scope assessed this round, including changes and limits>
 Roles and independence: <actual reviewer agent/session and evidence of separation from the lead, authors, author helpers, and all prior reviewer sessions for this plan>
 
-<!-- Record one round per submitted baseline, with a fresh independent reviewer. This report owns findings, round verdicts, and recheck history across revisions. Remove placeholders/comments in completed output. -->
+<!-- Record one round per submitted baseline, with a fresh independent reviewer. This report owns findings and the current verdict. Keep it to the current round: open findings in full, closed-this-round and earlier rounds as one line each; earlier details stay in the artifact repository history. Remove placeholders/comments in completed output. -->
 
 ## 1. Exact reviewed baseline
 
@@ -57,18 +57,17 @@ Flow/integration counterexamples: <inspected paths, relevant failures, conclusio
 - Defect and consequence: <what can fail and why>
 - Owner / requested correction: <planner or specific upstream stage; exact change needed>
 - Closure condition: <observable evidence the reviewer must verify>
-- Disposition: <Open | Resolved | Nonblocking follow-up | Superseded; rationale and replacement links>
+- Disposition: <Open | Reopened | Nonblocking follow-up | Superseded; rationale and replacement links>
+- Attempts: <n>; no-progress rechecks: <m>
 - Resolution / risk authority: <reviewer verification evidence and version; required acceptance authority if applicable>
 
 <!-- Repeat only for actual findings. An unassessed condition needs a missing-evidence action, not an invented defect. -->
 
-## 5. Round and recheck history
+## 5. Rounds
 
-| Round / finding | Submitted plan version and response locator | Reviewer recheck and closure evidence | Material progress / consecutive unsuccessful rechecks | Next action |
-| --- | --- | --- | --- | --- |
-| <round / REV ID> | <exact version and link to fix, disagreement, or upstream return> | <verified result and remaining condition> | <reason and count; exclude initial review/self-checks> | <continue, upstream return, stop affected loop, or closed> |
+Closed this round: <one line per finding: ID — closure evidence; or None>
 
-Earlier rounds: <round tag, reviewer session, scope, and verdict for each prior round; their content is in the artifact repository history>
+Earlier rounds: <one line per round: tag — verdict, open findings. Don't copy earlier details; read them with `git -C .artifacts grep -n -A 30 '<finding ID>' <tag> -- <path>`>
 
 ## 6. Verdict and next owner
 

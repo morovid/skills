@@ -22,7 +22,7 @@ Resume with the saved artifacts and the missing decision, evidence, access, or c
 
 ## Artifacts
 
-Specs, plans, reviews, and implementation records stay out of the project repository. They live in a hidden local git repository, `.artifacts/` at the project root, which is excluded through `.git/info/exclude` and has no remote. Each assignment gets its own folder. The lead commits every submission and review, tags each round, and records fingerprints as `artifacts@<sha>` and `repo@<sha>`; rechecks start from the diff between round tags. See `references/artifact-repository.md` in any skill.
+Specs, plans, reviews, and implementation records stay out of the project repository. They live in a hidden local git repository, `.artifacts/` at the project root, which is excluded through `.git/info/exclude` and has no remote. Each assignment gets its own folder. The lead commits every submission and review, tags each round, and records fingerprints as `artifacts@<sha>` and `repo@<sha>`; rechecks start from the diff between round tags. See `references/artifact-repository.md` in any skill. Reports hold only the current round: open findings in full, everything else one line; git keeps the rest. After a pass, small drift (up to 3 changed files) gets a scout-plus-lead drift check instead of a new review round.
 
 ## Agent and check policy
 
@@ -79,4 +79,6 @@ Authors, coders, and reviewers start their own scouts, scribes, and runners, whi
 }
 ```
 
-Check with `opencode debug agents`. The agents use GitHub Copilot models; with another provider, change the `model` line in each file (`opencode models` lists what's available).
+Check with `opencode debug agents`. The agents use GitHub Copilot models at modest effort: Haiku `low` for scout, scribe, and runner; Sonnet `medium` for author, designer, and coder; Opus `medium` for reviewer. Raise a `#variant` for hard assignments; with another provider, change the `model` line in each file (`opencode models` lists what's available).
+
+The lead runs in your own session, on whatever model you select there; the skills and agent files can't change it. Sonnet is usually enough for coordination; pick a stronger model for complex `spec` intake and discovery, which the lead does itself.

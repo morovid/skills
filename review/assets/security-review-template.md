@@ -82,16 +82,20 @@ Optional hardening: <bounded non-gating advice with rationale; or None>
 
 ## 7. Rechecks, verdict, and handoff
 
-| Round / finding | Submitted snapshot / response | Reviewer recheck and closure evidence | Material progress / unsuccessful recheck count | Next action |
+| Open finding | Submitted snapshot / response | This round's recheck evidence | Attempts; no-progress rechecks | Next action |
 | --- | --- | --- | --- | --- |
-| <round / SEC ID> | <version / locator> | <verified result, control and related paths rechecked, and remaining condition> | <reason/count; exclude initial review/self-checks> | <owner/action or stop affected loop> |
+| <ID> | <repo@sha / response locator> | <closure or remaining condition> | <n; m> | <owner/action> |
+
+Closed this round: <one line per finding: ID — closure evidence; or None>
+
+Earlier rounds: <one line per round: tag — verdict, open findings. Don't copy earlier details; read them with `git -C .artifacts grep -n -A 30 '<finding ID>' <tag> -- <path>`>
 
 Security conformity conclusion: <supported obligations, defects, and unassessed conditions>
 Threat/implementation conclusion: <control effectiveness, weaknesses, material plan deviations and remaining assumptions>
 Gate rationale: <why PASS/REVISE/BLOCKED follows from checks, findings, and required evidence>
 Open blockers / next owner: <exact correction or unblock evidence; or None>
 Nonblocking follow-up: <bounded action, rationale, required authority; or None>
-History / retained evidence: <prior version-bound verdicts and reasons unchanged evidence remains valid>
+Revalidation: <evidence reused from earlier rounds and why it still applies; affected downstream versions/IDs and required checks>
 Currency / downstream revalidation: <changed inputs/IDs, dependency/advisory freshness, affected code/test/planning handoffs and future release evidence; required rechecks>
 
 PASS supplies security evidence only for the reviewed snapshot, exposure assumptions, and declared scope. It does not establish whole-system security, compliance certification, or deployment authorization.

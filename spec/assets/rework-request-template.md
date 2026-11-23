@@ -58,7 +58,7 @@ Register updates belong at the canonical location. If unavailable, identify prop
 
 ## Return submission and revalidation
 
-<!-- The lead records the author response and attempts in this packet, or supplies one linked response with these sections if the packet is not writable. Findings, reviewer recheck evidence, and closure are authoritative in the review report. -->
+<!-- The lead records this round's author response here, replacing the previous round's response (it stays in the artifact repository history). Findings, attempt counts, and closure are authoritative in the review report. -->
 
 | Task / finding | Revised artifact / version and changed IDs | Evidence or decision source | Author disposition / remaining blocker |
 | --- | --- | --- | --- |
@@ -68,18 +68,6 @@ Affected downstream artifacts: <what is no longer current, required regeneration
 
 Re-review request: <review baseline to compare, affected QC checks and dependencies, and remaining independent review needed>
 
-### Shared attempt history and stalled-loop blocker
-
-Count consecutive unsuccessful review rechecks of the same blocking finding without material progress across all stages. Exclude the original review and author self-checks. Progress means a closure condition is satisfied or new evidence materially narrows the remaining cause and supports a concrete next correction. Wording changes, new versions/IDs, stage changes, and new sessions do not reset the count.
-
-After two such rechecks, stop the affected automatic loop, mark the packet Blocked, and identify the blocked task below. Preserve any independent usable work and issue the owning stage's blocker report. Stop sooner if no useful action remains. Resume only when a documented change addresses the blocker; record the reason before resetting the count. The reviewer records recheck outcomes and closes findings in the review report; link those records here.
-
-| Finding / task and attempt | Stage and input → output versions | Attempted correction / new evidence | Author gate and reviewer recheck links | Material progress / consecutive no-progress rechecks |
-| --- | --- | --- | --- | --- |
-| <RV IDs and RW IDs where applicable; persistent underlying finding if split> | <owning stage (including Review for review-local actions) and exact baselines> | <actual action and evidence/source links> | <local author gate if applicable and review report recheck for this attempt; Pending until rechecked> | <closure condition satisfied or narrowed cause; count maintained by review> |
-
-Stalled-loop blocker: <persistent condition, attempted fixes/history links, affected records, exact missing evidence/decision/access or other unblock action and owner; or None>
-
-Resume evidence: <documented change addressing the blocker, enabled next action, and reason to reset the count; or Not resumed>
+Stalled-loop blocker: <copied from the review report when a finding's no-progress count reaches two: persistent condition, affected records, exact unblock action and owner; or None>
 
 Completion: <link to review-verified closure for all required tasks, or exact pending/blocked action; author completion does not establish review closure or engineering readiness>

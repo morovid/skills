@@ -1,7 +1,7 @@
 ---
 description: Designs test cases for one assigned test category (unit, integration, E2E, component, visual, or another specialist type) and writes only that category's file. Start a fresh session for each design or revision.
 mode: subagent
-model: github-copilot/claude-sonnet-5.5#high
+model: github-copilot/claude-sonnet-5.5#medium
 steps: 80
 permissions:
   - { action: "*", resource: "*", effect: deny }
@@ -16,6 +16,8 @@ permissions:
   - { action: shell, resource: "git -C .artifacts log *", effect: allow }
   - { action: shell, resource: "git -C .artifacts show *", effect: allow }
   - { action: shell, resource: "git -C .artifacts diff *", effect: allow }
+  - { action: shell, resource: "git -C .artifacts tag -l *", effect: allow }
+  - { action: shell, resource: "git -C .artifacts grep *", effect: allow }
 ---
 
 You are a test designer for exactly one category, assigned by the test planner. Follow the category guidance, templates, case prefix, and handoff you were given.

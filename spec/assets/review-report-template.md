@@ -83,7 +83,7 @@ Limited-review conclusion, if applicable: <conclusion for the assessed subset, r
 
 ## 3. Findings and required corrections
 
-<!-- This report owns finding definitions, reviewer recheck evidence, and closure. Preserve the recheck record across rounds; link to the author response and attempt history rather than reproducing them here. -->
+<!-- This report owns finding definitions and closure. List open findings in full; findings closed in earlier rounds are deleted (they stay in the artifact repository history). -->
 
 ### RV1 — <concrete defect or unverified mandatory condition>
 
@@ -98,15 +98,20 @@ Limited-review conclusion, if applicable: <conclusion for the assessed subset, r
 - Dependent records and revalidation: <affected source/downstream IDs, assembly, reviews, approvals>
 - Closure criteria: <observable source/content/coverage comparison sufficient to verify the fix>
 - Rework task: <RW ID and packet link; or review-local action>
-- Resolution: <Open / Addressed—pending recheck / Closed / Reopened; for each recheck, record the round, exact revised baseline, evidence against the closure criteria, disposition, reviewer, and date when actually known>
+- Resolution: <Open / Addressed—pending recheck / Reopened; this round's evidence against the closure criteria>
+- Attempts: <n>; no-progress rechecks: <m>
 
 Nonblocking suggestions: <optional improvements and rationale; separate from mandatory corrections, or None>
+
+Closed this round: <one line per finding: ID — closure evidence; or None>
+
+Earlier rounds: <one line per round: tag — verdict, open findings. Don't copy earlier details; read them with `git -C .artifacts grep -n -A 30 '<finding ID>' <tag> -- <path>`>
 
 ## 4. Return and re-review handoff
 
 Active rework packet for the lead: <review-rework.md link and applicable RW/RV IDs, or None>
 
-Author response and shared attempt history: <links to the packet's response and attempt records, including the no-progress count, or the linked response if the packet is not writable; Pending / Not applicable as appropriate>
+Author response: <link to this round's response in the packet, or the linked response if the packet is not writable; Pending / Not applicable>
 
 Review-local actions: <RV links, prerequisites (including any RW dependencies), expected outputs, and exact action and owner; or None>
 
@@ -118,17 +123,7 @@ Re-review boundary: <what must be rechecked and why; changed versions and affect
 
 Round limit: <rounds used of 5; if round 5 ends without Ready for engineering, Escalated to human with the decision or input needed; record any human authorization for more rounds; or Not reached>
 
-### Review-only attempt history (when no rework packet exists)
-
-Count consecutive unsuccessful review rechecks of the same blocking finding without material progress; exclude the original review and author self-checks. Progress requires satisfying a closure condition or materially narrowing the cause with evidence that supports a concrete next correction. Wording, version, ID, stage, or session changes do not reset the count.
-
-| Finding and attempt | Input → output versions | Action / new evidence | Recheck link | Material progress / consecutive no-progress rechecks |
-| --- | --- | --- | --- | --- |
-| <RV ID and attempt; persistent finding if split> | <exact baselines> | <review-local action and evidence/source links> | <finding's resolution record for this attempt> | <closure condition satisfied or narrowed cause; current count> |
-
-Stalled-loop disposition: <after two consecutive unsuccessful rechecks without material progress, or sooner if no useful action remains, stop the affected loop and mark Blocked at review; link attempts and state the persistent condition, exact unblock action, and owner; or Not triggered>
-
-Resume evidence, if any: <documented change addressing the blocker and enabled next action, with the reason to reset the count; or Not resumed>
+Stalled-loop disposition: <after two consecutive no-progress rechecks of a blocking finding (see its Attempts line), or sooner if no useful action remains, stop the affected loop and mark Blocked at review with the persistent condition, exact unblock action, and owner; or Not triggered>
 
 ## 5. Assembly and final readiness gate
 
@@ -160,7 +155,7 @@ Handoff: <for Ready for engineering, the lead commits this report with the engin
 | --- | --- | --- | --- |
 | Engineering specification | <path, or Not assembled> | <assembled specification for this package> | <Current / Needs revalidation> |
 | <normative input; one row per source brief/request, discovery handoff, canonical catalog, D/A/Q register, or other applicable input> | <path, or external source locator with its own version> | <which scope, decisions, behavior, obligations, or acceptance conditions this input governs> | <Current / Needs revalidation> |
-| <supporting evidence, rework history, or approval evidence, if applicable> | <locator or record ID> | <evidence, resolved history, or approval applicability> | <Current / Needs revalidation / Historical> |
+| <supporting evidence or approval evidence, if applicable> | <locator or record ID> | <evidence or approval applicability> | <Current / Needs revalidation> |
 
 Next owner and action: <lead routes the packet to its owning phase in spec, review-local unblock action, or Engineering planning>
 

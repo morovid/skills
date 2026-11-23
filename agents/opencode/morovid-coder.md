@@ -1,7 +1,7 @@
 ---
 description: Implements assigned production and test tasks on assigned files and reports changed paths, deviations, and check evidence. Start a fresh session for each assignment and each fix.
 mode: subagent
-model: github-copilot/claude-sonnet-5.5#high
+model: github-copilot/claude-sonnet-5.5#medium
 steps: 150
 permissions:
   - { action: "*", resource: "*", effect: deny }

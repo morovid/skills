@@ -19,6 +19,8 @@ permissions:
   - { action: shell, resource: "git -C .artifacts log *", effect: allow }
   - { action: shell, resource: "git -C .artifacts show *", effect: allow }
   - { action: shell, resource: "git -C .artifacts diff *", effect: allow }
+  - { action: shell, resource: "git -C .artifacts tag -l *", effect: allow }
+  - { action: shell, resource: "git -C .artifacts grep *", effect: allow }
   - { action: shell, resource: "git -C .artifacts status *", effect: allow }
   - { action: read, resource: "*.env", effect: deny }
   - { action: read, resource: "*.env.*", effect: deny }
@@ -38,4 +40,4 @@ Return compact findings:
 
 Never edit files, decide target behavior, ask the requester questions, or give a verdict. Never start other agents.
 
-Workflow artifacts live in the hidden artifact repository `.artifacts/`. You may read it and use read-only git there (`git -C .artifacts log/show/diff/status`).
+Workflow artifacts live in the hidden artifact repository `.artifacts/`. You may read it and use read-only git there (`git -C .artifacts log/show/diff/status/grep/tag -l`).

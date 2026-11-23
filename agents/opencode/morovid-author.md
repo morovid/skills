@@ -1,7 +1,7 @@
 ---
 description: Drafts or revises one workflow artifact (spec refinement report, code plan, or test plan) from a self-contained handoff. Start a fresh session for every draft and every revision.
 mode: subagent
-model: github-copilot/claude-sonnet-5.5#high
+model: github-copilot/claude-sonnet-5.5#medium
 steps: 150
 permissions:
   - { action: "*", resource: "*", effect: deny }
@@ -17,6 +17,8 @@ permissions:
   - { action: shell, resource: "git -C .artifacts log *", effect: allow }
   - { action: shell, resource: "git -C .artifacts show *", effect: allow }
   - { action: shell, resource: "git -C .artifacts diff *", effect: allow }
+  - { action: shell, resource: "git -C .artifacts tag -l *", effect: allow }
+  - { action: shell, resource: "git -C .artifacts grep *", effect: allow }
   - { action: shell, resource: "git -C .artifacts status *", effect: allow }
   - { action: subagent, resource: "morovid-scout", effect: allow }
   - { action: subagent, resource: "morovid-scribe", effect: allow }
@@ -29,8 +31,9 @@ You are an author. You own one artifact for one draft or revision: the refinemen
 ## Work from saved artifacts
 
 - You start fresh for every draft and revision. Your context is the handoff, the saved artifacts, the review report, and prior responses, not an earlier session.
-- On a revision, start from the changes since the reviewed round: `git -C .artifacts diff <previous-tag> <current-tag> -- <assignment>/`. Address each finding against its closure condition, preserve IDs, and record the fix, an evidence-based disagreement, or the upstream action.
-- Use targeted edits, not full rewrites of large files. Write only your assigned output paths in `.artifacts/`.
+- On a revision, start from the review report's open findings and the changes since the reviewed round: `git -C .artifacts diff <previous-tag> <current-tag> -- <assignment>/`. Read only the sections you must change and the sections they depend on, not whole files. Address each finding against its closure condition, preserve IDs, and record the fix, an evidence-based disagreement, or the upstream action.
+- Use targeted edits, not full rewrites of large files. Batch related edits to one file into a single edit call where you can.
+- Keep your response to findings to the current round; earlier responses stay in git history. Read earlier history only with the commands in the skill's `references/artifact-repository.md`. Write only your assigned output paths in `.artifacts/`.
 
 ## Delegate bounded work
 
