@@ -1,26 +1,50 @@
 ---
 name: implement
-description: Execute a feature's reviewed code and test plans, run the prescribed checks, and resolve independent implementation review findings. Also coordinates missing upstream stages when asked to take a request end to end. Does not authorize release.
+description: Execute a passed code plan and test plan in parallel batches, with production code and tests written by separate coders. Integrate the changes, run the prescribed checks, and submit to independent review, then fix what the review returns. Doesn't review its own work or authorize release. Part of the feature workflow.
 ---
 
-# Implement a feature
+# Implement
 
-The lead owns sequencing, integration, and requester communication. Implementation workers own changes and author evidence; [review](../review/SKILL.md) owns independent findings and verdicts. Use these subagents: `morovid-coder` for implementation tasks, `morovid-scout` for exploration, and `morovid-runner` for established checks; [review](../review/SKILL.md) uses `morovid-reviewer`. The lead does complicated cross-cutting integration itself. If an agent isn't installed, use the closest available one with the same narrow handoff (a read-only explorer for `morovid-scout`, the most capable available subagent for authors and reviewers); this never removes the required role separation. If nested delegation is unavailable, the lead dispatches scoped tasks and relays results.
+This stage is part of the [feature workflow](../feature/SKILL.md). Follow its [principles](../feature/references/principles.md), [artifacts](../feature/references/artifacts.md) and [delegation](../feature/references/delegation.md). You are the lead: you sequence and integrate the work, and `morovid-coder` sessions write the code and tests. [Review](../review/SKILL.md) gives the verdict.
 
-## 1. Start at the earliest missing or invalid handoff
+## 0. Check the input
 
-- For an end-to-end request, load and run the missing or affected skills in order: [spec](../spec/SKILL.md) for intent and **Ready for engineering**; [plan-code](../plan-code/SKILL.md) for design and **Ready for implementation**; [plan-tests](../plan-tests/SKILL.md) for coverage and **Ready for test implementation**. Resume directly here when all three handoffs qualify. Stop at a requested stage boundary; do not broaden a planning-only request into implementation.
-- Before editing, locate the exact **Current** spec with its reviewed package index and both plans with matching full independent **PASS** reports, linked designs, and applicable baselines (normally the `-pass` tags of `spec`, `plan-code`, and `plan-tests` in the artifact repository). Accept equivalent artifacts that meet the same conditions. Reuse unchanged passed work; don't rerun a review merely because this skill loaded it. Record the upstream `artifacts@<sha>`, repo rules, the starting project fingerprint (`repo@<sha>`, plus a diff hash for local changes), scope, execution access, and any material drift. Preserve unrelated work. Evidence and reports live in the [artifact repository](references/artifact-repository.md), outside the implementation snapshot. If a necessary upstream skill, authority, or input is unavailable, name the affected work and exact next action rather than infer behavior or bypass readiness.
-- On resume, read the [implementation record](assets/implementation-record-template.md), actual diff, review reports, prior responses and execution evidence. Verify which steps and checks still apply to the current snapshot before resuming; retain incomplete and failed outcomes.
+`STATE.md` must show spec and plan `passed` and current. Record the starting project commit in `implement/record.md`, using the [record template](assets/record-template.md). Leave unrelated work in the tree intact.
 
-## 2. Implement and integrate by dependency
+## 1. Plan the batches
 
-1. **Dispatch work from the plans.** Schedule production tasks and test work together using their IDs and dependencies. Establish shared interfaces and fixtures before dependent work, or write a planned regression test first when it can exercise the intended behavior. Run independent assignments in parallel only with non-overlapping edits; use one writer per file/worktree where edits overlap. Give each `morovid-coder` exact plan/spec/case locators, scope and exclusions, prerequisites, file ownership, allowed commands, and expected observable completion. Keep integration and ambiguous work with the lead. If no suitable helper is available, the lead can do bounded author work; record authorship and never use that work as independent review.
-2. **Integrate and record the actual changes.** Inspect the diff against the assigned scope and record completed tasks, changed paths, authors, deviations, and outstanding work. Leave unrelated edits intact. Keep each requirement and planned test oracle authoritative at its source; don't change a correct assertion to make faulty behavior pass. A local mechanical adjustment consistent with confirmed commitments can be logged; a material behavior/scope gap goes to `spec`, a production design/contract gap to `plan-code`, and a coverage, oracle, or observation-boundary change to `plan-tests`. Reopen the earliest affected skill and revalidate dependent plans before changing affected implementation. Continue unaffected work when safe.
-3. **Run author checks once per applicable baseline.** Run the prescribed completion, acceptance, and regression checks (including existing-check or inspection-only dispositions); reuse inspectable matching CI evidence when permitted instead of duplicating execution. Record exact command or inspection, snapshot, environment, actual selection and result, log/evidence locator and limitations. Distinguish failures and skipped or unrun checks. Preserve first failures, identify product/test/environment blockers, and run affected checks after fixes. Do not edit baselines or waive failed checks without established authority. Author execution proves only what ran, not review or release readiness.
+- Group the IMP tasks (code plan) and the WORK tasks (test plan) into batches. A batch holds tasks that don't depend on each other and don't share files.
+- Shared interfaces, contracts and fixtures go in the first batch.
+- Every file in a batch has exactly one owner. When files can't be split cleanly, give the coders separate git worktrees and merge them yourself after the batch.
 
-## 3. Submit to independent review and resolve returns
+## 2. Dispatch
 
-- Save `implementation-record.md` beside the code plan by default, using the template as a handoff index, not a second plan or review report. Pin the submission with its project fingerprint, covering relevant local changes, dependencies, configuration and fixtures, and commit the record to the artifact repository (`implement r<N>: submit`, tagged). Supply the record, reviewed packages, change boundary, author identities, actual check evidence and any known gaps to `review`. If the request stops before review, return the snapshot and mark it **Awaiting review**, not reviewed. When useful, let review assess unaffected areas despite a known blocker; keep the blocked outcomes explicit.
-- On **REVISE** or **BLOCKED**, route available fixes and unblock actions to fresh `morovid-coder` sessions (never a resumed session) or the earliest owning skill. Give each fresh author the finding, the implementation record, the current diff, and prior responses. Carry out authorized corrections or revalidation that can proceed now, including refreshing stale plan handoffs. Pause only the work that depends on a still-unavailable prerequisite; name the owner and exact unblock action. Record finding IDs, responses, changed paths/versions, and new check evidence, then send the changed or newly supported submission to `review` for fresh independent rechecks. Keep the attempt history in the review reports and honor their stalled-loop decisions and five-round limit: if `review` escalates to a human, stop implementation work on the affected findings and report the escalation. Do not rerun an unchanged blocker or close findings as the author.
-- Finish as **Implementation reviewed** only when planned work and prescribed checks are accounted for and `review` has a full **PASS** that is **Current** for the exact submitted snapshot. Otherwise report remaining work, review status, partial evidence, and what happens next. Return the snapshot, changed paths, implementation record, check summary, and linked review. No status here authorizes merge, release, or deployment.
+- **Separate authors.** Production code and tests always go to different coder sessions. A coder who wrote the production code for a behavior never writes or edits its tests, and the reverse.
+- Test coders work from the cases and the planned interfaces, not from the production diff, so both kinds of coder can run in the same batch.
+- Run up to 4 coders at a time, each in a fresh session, each with a handoff file (`implement/handoffs/<batch>-<n>.md`) containing:
+  - its task or case IDs, with locators;
+  - for test work, the category file's Defaults section;
+  - the files it owns, the fixtures it may use but not edit, and its exclusions;
+  - its completion condition.
+- Wait for the whole batch, then integrate before starting the next one.
+
+## 3. Integrate and check
+
+- After each batch, inspect the diff against the assigned scope and update the record's Work table.
+- A small mechanical adjustment that fits the plan is logged as a deviation.
+- A behavior, design or coverage gap goes back to its owner ([routing](../feature/references/routing.md)). Continue the work it doesn't affect.
+- Never change a correct assertion to make faulty behavior pass.
+- Run the prescribed checks through `morovid-runner`, once per snapshot. Record each run in the Check runs table with an ID; reviewers cite these IDs. Reuse matching CI evidence where it exists. Keep failures, skips and environment problems distinct.
+
+## 4. Submit and fix
+
+1. Commit the record (`implement r<N>: submit`, with trailers including `Repo:`), then run [review](../review/SKILL.md).
+2. On REVISE, route the findings:
+   - A production finding goes to a fresh production coder.
+   - A test finding goes to a fresh test coder.
+   - An upstream finding goes to its stage.
+
+   Each fix handoff gives the finding IDs, the record and the current diff. Batch independent fixes as in step 1, run the affected checks again, update the record, and resubmit.
+3. Stop when `review` passes or escalates.
+
+Nothing here authorizes a merge, release or deployment.

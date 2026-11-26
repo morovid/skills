@@ -1,18 +1,20 @@
-# Security phase — control conformity and exposure
+# Security review: controls and exposure
 
-Coordinate a defensive, independent security review using the [shared procedure](coordinator.md), [security rubric](security-rubric.md), and [security report template](../assets/security-review-template.md). Default finding IDs: `SEC-001`. Preserve affected specification, design, test and advisory identifiers. This is not penetration testing or exploit development.
+Use this with the [review protocol](../../feature/references/review-protocol.md). Finding prefix: `sec-F`. This review runs only when the [security trigger](../../feature/references/tracks.md) applies. It is defensive review, not penetration testing.
 
-## Establish the additional baseline
+| Check | Passes when |
+| --- | --- |
+| X1 Scope | The protected assets, actors and tenants, entry points, trust boundaries and sensitive data flows touched by the change are mapped from code and configuration. Applicable policies and supplied standards (with their versions) are identified. |
+| X2 Access control | Permission and ownership rules from the spec are enforced at the server boundary. Denials leave no unauthorized effect or data exposure. Client checks and mocks don't count. |
+| X3 Input and output handling | Untrusted input is validated or encoded for each sink: queries, commands, templates, paths, deserialization, redirects. Errors don't leak sensitive data. |
+| X4 Secrets and data | No secrets in code, logs or test data. Sensitive data is stored, logged, retained and transferred as the spec and policy require. |
+| X5 Dependencies | New or changed dependencies are triaged against advisories for their resolved versions and actual usage. Suppressions carry an owner, a reason and an expiry. |
+| X6 Evidence | Supporting scans and tests ran on this snapshot, with tool, configuration and date recorded where they matter. A clean scan isn't proof of absence. |
 
-Include applicable security policy and threat models, relevant tests and reviewed test designs, dependency locks, build/deployment definitions, exposure assumptions, and prior security/advisory/scan evidence. Record applicable controls and exclusions. For a required external standard, record its exact version and control IDs using authoritative sources; don't impose a whole framework, threshold, tooling or approval without authority. Earlier design/partial reviews do not establish final security readiness.
+**Limits:**
+- No exploit development, intrusive probing, credential use, third-party scans, or uploading proprietary code.
+- Keep secrets and personal data out of handoffs and reports.
+- Describe a weakness by the asset, prerequisites and consequence, without payloads.
+- Confirm time-sensitive advisory facts from authoritative sources (web access is allowed for this).
 
-## Assign and verify the review
-
-- **Security conformity:** own control requirements, including permission enforcement and required denials. Trace each applicable security obligation and acceptance/DoD condition to actual control behavior and evidence or source-justified non-applicability. Reconcile control-specific DES/DEC/IMP commitments. Code owns the production flow and downstream state/error integration; Tests owns assertion adequacy and implemented coverage. Link their evidence when relevant rather than reassessing their verdicts.
-- **Threat and implementation assessment:** map protected assets, actors/roles/tenants, relevant entry points, trust boundaries, sensitive flows/sinks and external dependencies using code and deployment evidence. Include unchanged shared services and indirect consumers where relevant. Check the actual boundary where controls must hold, including denials and absence of unauthorized effects. Client checks and mocks do not prove server enforcement. A source/plan match does not excuse an evidenced weakness; distinguish missing or ineffective controls from unconfirmed concerns and optional hardening. State what was excluded or uninspected.
-- Use static source/config review, established defensive tests and approved source/secret/dependency/container/infrastructure scans when they support the check. Inspect commands/config first. No exploit development, vulnerability reproduction, intrusive probing, credential use, third-party scans or uploading proprietary data. If a necessary check is outside the permitted boundary, state the evidence gap and continue other checks. Keep secrets, tokens and personal data out of worker handoffs and outputs; cite redacted locators. Describe failed enforcement, affected asset, credible prerequisites and consequence without payloads or bypass instructions.
-- Triage advisories against resolved versions, actual usage/exposure, policy and compensating controls. Confirm time-sensitive facts with authoritative advisories/vendor documentation and record source, assessment date, tool/config and database timestamp where available. A clean scan does not establish absence; a version match alone does not establish exposure. Enforce policy that blocks regardless of reachability. Existing suppressions and risk acceptance need evidence, authorized owner, scope, rationale and expiry/review where required; don't add suppressions or relabel failed mandatory conditions as accepted risk. An upgrade or suppression alone is not closure: verify the control across affected paths and consumers, with relevant existing evidence.
-
-## Route and hand off
-
-Send code/config/dependency defects to their author, design gaps to [plan-code](../../plan-code/SKILL.md), planned verification gaps to [plan-tests](../../plan-tests/SKILL.md), implemented-test issues to the test author and [Tests phase](tests.md), and policy/behavior ambiguity to its actual owner or [spec](../../spec/SKILL.md). Record an explicit owner and gate disposition for relevant inherited weaknesses. Keep conformity, exposure/control effectiveness, and verification/freshness conclusions distinct. Relevant code/config/dependency/exposure/advisory changes require affected revalidation; a PASS is not a whole-system guarantee, compliance certification, or deployment authorization.
+**Owners:** `implement/production-coder` for code, configuration and dependency defects, `plan/code-planner` for design gaps, `implement/test-coder` for missing defensive tests, and spec stages for undecided policy.

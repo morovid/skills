@@ -1,61 +1,60 @@
 ---
 name: spec
-description: Take a change request, existing specification, or review return through intake, discovery, requester clarification, delegated refinement, and independent review. Assemble the engineering handoff and issue a readiness verdict for the reviewed versions.
+description: Turn a change request into reviewed, verifiable requirements through intake, discovery of current behavior and impacts, requirements with acceptance criteria, and independent review. Ends with a passed spec that planning can use. Part of the feature workflow.
 ---
 
-# Specification and Engineering Readiness
+# Spec
 
-Run intake, discovery, refinement, and independent review in one `spec` invocation. The lead owns intent, discovery synthesis, and requester questions; a distinct refiner derives verifiable requirements; an independent reviewer validates the package and, in the final passing round only, assembles the engineering specification. Use these subagents: `morovid-scout` for bounded exploration and file reads, `morovid-author` as the refiner, `morovid-scribe` for mechanical edits, and `morovid-reviewer` for independent review. If an agent isn't installed, use the closest available one with the same narrow handoff (a read-only explorer for `morovid-scout`, the most capable available subagent for authors and reviewers); this never removes the required role separation. If nested delegation is unavailable, the lead dispatches scoped helpers and relays their results. Do not implement the change or claim delivery acceptance.
+This stage is part of the [feature workflow](../feature/SKILL.md). Follow its [principles](../feature/references/principles.md), [artifacts](../feature/references/artifacts.md), [delegation](../feature/references/delegation.md) and [review protocol](../feature/references/review-protocol.md). You are the lead.
 
-## Start or resume the assignment
+**Roles:**
+- The lead does intake and discovery, using scouts, and is the only one who asks the requester.
+- On M and L, a `morovid-author` writes the requirements.
+- A reviewer, chosen per [delegation](../feature/references/delegation.md#which-reviewer), gives the verdict.
+- The lead never writes M/L requirements and never reviews.
 
-1. Accept anything from a one-sentence request to a full draft. Read the supplied request, artifacts, and applicable project or assignment rules. Identify the assignment, artifact destination, repositories and relevant revisions, and any access limits. Reuse artifacts belonging to the assignment, including equivalent documents, after checking their authority and currency. Do not overwrite another assignment's artifacts.
-2. On a continuation, read the current artifacts and canonical decisions, then apply new answers, evidence, or scope changes. If given a review report, rework packet, or equivalent findings, follow [the review-return procedure](references/rework.md). Use paths and versions from the packet to locate the reviewed inputs; no need to ask the requester to restate them. Reuse verified, unchanged authoring work and start at review when only the review or assembly needs attention.
-3. Keep the artifacts in the [artifact repository](references/artifact-repository.md): set it up if missing, and save `initial-assignment-brief.md`, `discovery-report.md`, and `refinement-report.md` together in the assignment folder, unless the assignment names another location. The lead commits at each checkpoint; the commit fingerprints every artifact version. Retain one authoritative definition per record and link the inputs. Scale the depth and format to the change; equivalent documents or combined sections are fine if the same information, gates, and links are present.
+If `spec` runs without `feature`, set up the assignment folder and `STATE.md` first ([artifacts](../feature/references/artifacts.md)).
 
-## Run the authoring loop
+## 1. Intake
 
-1. **Establish intent.** Apply [intake](references/intake.md) to capture the objective, actors, boundaries, constraints, and provisional discovery depth. Clarify only what prevents meaningful investigation; carry factual questions and more detailed choices forward. When the intake gate passes, begin discovery immediately.
-2. **Investigate.** Apply [discovery](references/discovery.md). Map current behavior, significant direct and indirect impacts, added/changed/removed/preserved behavior, and its authority. Investigate facts with available evidence before putting them to the requester. Feed evidence that challenges scope or constraints back into intake; it is not permission to expand scope.
-3. **Delegate refinement.** Hand the confirmed behavior to a separate `morovid-author` using the procedure below. The refiner can draft independent, confirmed portions while other items are open, but must keep dependent work incomplete. The lead routes returned factual gaps to targeted discovery and unresolved choices to the decision-maker. Corrections to requirements or coverage with confirmed authority go back to a refiner, not the lead.
-4. **Ask and incorporate answers inside the loop.** Use the host's question tool when available, otherwise ask in chat. Ask focused questions only when answers are needed and not already in the request or evidence. State the scenario, what is blocked, and options with their consequences when useful; label recommendations as proposals. Batch related questions, record their IDs and dispositions, and save progress before waiting for a reply. On an answer, record its source and authority, revisit the earliest affected phase, and rerun dependent checks. Do not require the requester to invoke another skill to continue.
-5. **Reconcile and repeat.** After a change, trace it through the brief, evidence, impacts, confirmed behavior, requirements, and acceptance. Recheck affected gates in dependency order. Continue useful investigation, clarification, or drafting until the authoring gates pass or the remaining work has an exact blocker. Do not restart unaffected work or send a draft to review merely to decide a known open question.
+Apply [intake](references/intake.md) and choose the [track](../feature/references/tracks.md).
+- **M/L:** write `spec/brief.md`.
+- **S:** start `spec/spec.md` from the [S template](assets/spec-small-template.md).
 
-### Delegate repository evidence gathering
+## 2. Discovery
 
-- When the host supports delegation, use `morovid-scout` subagents for file discovery, reading relevant code/tests/docs, and collecting existing logic. Give each a bounded read-only question and search scope (e.g. locate the entry point, trace the state transition, or identify consumers and relevant tests). Parallelize independent scopes; use narrowly targeted follow-ups in later rounds rather than repeating the initial search.
-- Ask for compact findings: relevant repo/path and symbol, line, or test locator; the rule, flow, or dependency it supports; evidence status; what was read versus actually run; and uncertainty, conflicts, or gaps. Distinguish files worth reading from verified claims. If agents are unavailable or the task is a tiny lookup, gather the evidence directly.
-- The lead agent reconciles findings and verifies material or conflicting claims at source. Scouts neither choose target behavior nor edit the specification, ask the requester, or sign off on readiness. Delegated source collection is not independent specification review.
+Apply [discovery](references/discovery.md), sending bounded questions to scouts in parallel.
+- **M/L:** write `spec/discovery.md`.
+- **S:** fill in the discovery sections of `spec.md`.
 
-### Delegate refinement
+Settle facts from evidence before asking anyone. Batch the questions that remain, ask, and record the answers in the brief's register.
 
-1. Launch `morovid-author` as the refiner, not the lead or a scout. Launch a fresh `morovid-author` session for the first draft and for every revision; never resume an earlier refiner session. The saved artifacts, findings, and prior responses carry the context, not the previous session. Reuse unchanged output when it still covers the current inputs. Refinement is authorship; its checks are not independent review.
-2. Provide a self-contained handoff, not the conversation transcript. Include [refinement instructions](references/refinement.md) and [the report template](assets/refinement-report-template.md); the task scope and exclusions; applicable standards; paths and versions for the brief, discovery report, canonical D/A/Q register, and relevant evidence; and the confirmed behavior IDs, decisions, open blockers, and repository baseline. For revisions, include the prior refinement report, changed inputs and affected IDs, and relevant RV/RW tasks and closure checks. Specify the exact output path or assigned sections and what must remain unchanged.
-3. The refiner owns drafting, corrections, and the author checks on that output. The lead checks the saved handoff for completeness and records its author session and baseline, not a second assessment. Route changes with updated sources to a fresh `morovid-author`. The refiner delegates clerical edits to `morovid-scribe` where practical; they may apply supplied edits, not decide what behavior means. Keep one writer per artifact at a time.
-4. If separate delegation is unavailable or fails and cannot be retried, save useful upstream work and mark the assignment **Blocked at refinement**, identifying the missing capability or failed handoff and how to resume. Do not substitute lead-authored refinement or claim readiness. A separate refinement agent is an author, not the independent reviewer.
+## 3. Requirements
 
-### Preserve decisions and revalidate dependencies
+- **M/L:** start a fresh `morovid-author` with a handoff file:
+  - Procedure: [requirements](references/requirements.md).
+  - Template: [requirements template](assets/requirements-template.md).
+  - Inputs: the brief and discovery, by section and ID range.
+  - Output: `spec/requirements.md`.
 
-Use the established canonical decisions/assumptions/questions (D/A/Q) register. Otherwise record intake entries in the brief, then transfer them into discovery report section 5 with IDs, sources, and history intact. Link the canonical location from earlier and later artifacts; do not keep competing current copies. Resolve or disposition questions with supporting evidence or confirmation, never by assuming a material outcome. Record a changed confirmed decision with a new D ID and a supersession link. If required canonical edits are unavailable, record proposed changes and keep dependent material content blocked.
+  When the author returns gaps or questions, resolve them (targeted discovery, or the requester), then answer in the same session within the round.
+- **S:** write the requirements sections of `spec.md` yourself, following the same procedure.
 
-Preserve evidence and specification IDs as content evolves. Mark affected artifacts **Needs revalidation** separately from stage status; prior gates, reviewed baselines, and version-bound approvals are invalid for changed content until rechecked. Record affected IDs and versions, required checks, and owners, including explicit invalidations for artifacts you cannot edit. Restore **Current** only for authoring artifacts whose affected gates pass; leave review and assembly revalidation to the reviewer. When the package is **Ready for engineering** and only the repository moved slightly (at most 3 changed files), run a [drift check](references/artifact-repository.md#drift-check) instead of a new review round.
+## 4. Review
 
-## Review and hand off
+1. Commit and tag the submission (`spec r<N>: submit`).
+2. Start the reviewer with a handoff file:
+   - Rubric: [spec rubric](references/review-rubric.md).
+   - Files: the spec files under review.
+   - The round tag and the project commit.
+   - Open findings and, on rechecks, the changes since the last round.
+   - Output: `spec/review.md`.
+3. Commit and tag the saved verdict, add the trailers, and append to `findings.jsonl`.
+4. Act on the verdict:
+   - **PASS:** apply the Editorial findings, make the pass commit, and set spec `passed` in `STATE.md`. Hand off to [plan](../plan/SKILL.md).
+   - **REVISE:** route each Blocking finding by its `Owner`. Intake and discovery findings are yours, and so are requirements findings on S. On M/L, requirements findings go to a fresh author, whose handoff lists the finding IDs and the changes. Authors fill in the `Response:` lines. Then resubmit.
+   - **BLOCKED or round limit:** follow the [feature workflow](../feature/SKILL.md#stop-and-report).
 
-Mark the package **Ready for review** when the current intake, discovery, and refinement outputs meet their own checks and there is no known material open question or assumption. This is a submission checkpoint, not a second end-to-end assessment. Independent validation, assembly, mandated approvals, and finding closure are review outcomes.
+## Changes after a pass
 
-1. **Delegate independent review.** Commit and tag the submitted package in the artifact repository (`spec r<N>: submit`). For the initial review and every recheck, launch `morovid-reviewer` in a new session, distinct from the lead, refiners, author-side evidence helpers, and any prior reviewer session. If independent review cannot be completed, preserve the authoring checkpoint and mark the assignment **Blocked at review** with the exact unblock action. Never substitute a self-check.
-2. **Hand off the exact baseline.** Give the reviewer [review instructions](references/review.md), the original request, applicable standards and approval rules, the project fingerprint and access limits, author identities, the round tag, and paths for the current brief, discovery, refinement, canonical D/A/Q register, and supporting evidence. Include any prior findings, rework responses, approvals, and affected versions, and the current round number. Specify where to write `review-report.md`, `review-rework.md` when needed, and `engineering-specification.md`, normally beside the authoring artifacts. The reviewer owns the assessment, finding closure, and editorial assembly; only the lead talks to the requester, and only the appropriate authority can supply a required approval. Keep one writer for each artifact at a time.
-3. **Resolve and recheck findings in the same invocation.** Read the saved outputs, then commit and tag them (`spec r<N>: <verdict>`, tag `<assignment>/spec/r<N>-<verdict>`); a launch or summary is not a verdict. Use [the review-return procedure](references/rework.md) to route findings to their owners. After corrections, hand changed versions, the response, and prior findings to a fresh reviewer for recheck. Honor the stalled-loop guard and the round limit below; do not restart unaffected work or retry an unchanged blocker.
-4. **Assemble the engineering specification once, at the end.** Rounds that end in **Needs rework** or **Blocked at review** don't write or update `engineering-specification.md`. In the round where every other check passes, the same reviewer assembles the specification, reconciles it (QC14), and only then issues the readiness verdict. If the file already exists from an earlier completed run, update only the sections affected by the changes instead of rebuilding it.
-5. **Finish only on an explicit pass.** Report **Ready for engineering** only when the reviewer has passed the full gate on the exact current package, rechecked blocking findings, reconciled the assembly, and verified any actually required approvals. Verify that the package index identifies the artifacts being returned. No refinement feedback, no reported findings without a full assessment, or a limited review cannot establish readiness.
-
-### Round limit
-
-A review loop runs at most five independent review rounds: the initial review plus four rechecks. Number each round in the review report (for example, "Round 3 of 5"). If round 5 ends without **Ready for engineering**, don't start another revision or review. Stop, mark the assignment **Escalated to human**, and report to the requester: the review report and rework packet, the open findings with their attempt history, what was tried, and the decision or input needed. Resume only when a person authorizes more rounds, makes a decision, or changes the scope. Record that authorization in the review report; it starts a new budget of five rounds. The stalled-loop guard can stop a loop sooner.
-
-## Finish or pause
-
-If an answer, evidence, access, independent reviewer, or mandated approval is unavailable and no further independent work can help, save and commit the artifacts and pause at the earliest affected phase. Identify the affected IDs and exact unblock action. Do not repeat an unanswered question or retry an unchanged check without a new lead. Resume from the saved state when the missing input arrives.
-
-Return the artifact locations and status, plus either the exact blocker/questions or the reviewed engineering handoff for [plan-code](../plan-code/SKILL.md). No separate review skill invocation is needed.
+A requester change after PASS starts a new round. Don't edit passed files outside a round. Mark plan, implement and review `stale` if they rely on the changed IDs.

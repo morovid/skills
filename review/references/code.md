@@ -1,13 +1,19 @@
-# Code phase — production behavior and plan conformity
+# Code review: production behavior and plan conformity
 
-Coordinate the independent production-code review using the [shared procedure](coordinator.md), [code rubric](code-rubric.md), and [code report template](../assets/code-review-template.md). Default finding IDs: `CR-001`. Keep the specification and plan conclusions separate.
+Use this with the [review protocol](../../feature/references/review-protocol.md). Finding prefix: `code-F`.
 
-## Assign and verify the review
+| Check | Passes when |
+| --- | --- |
+| C1 Spec conformity | Each in-scope production obligation (FR, NFR, AC, B, including Preserve and Remove) has implementing code whose actual outcome matches the spec, or an evidenced "no code change". |
+| C2 Plan conformity | DES, DEC and IMP commitments are implemented. Deviations are logged in the record and don't change behavior or contracts. No unsupported changes were made. |
+| C3 Logic, state and failure | The success, rejection, failure, retry, concurrency, recovery and partial-effect paths behave as required. Invariants hold. |
+| C4 Integration and compatibility | Consumers, routes, registrations, events, configuration, persistence and migrations are connected. Preserved behavior and compatibility are intact, and removals strand no consumer. |
+| C5 Quality constraints | Sourced performance, accessibility and reliability constraints within production code are met, and the code fits the repository's patterns. |
+| C6 Evidence | Completion and regression runs for this snapshot support the conclusions. Failures and unrun checks are explicit. |
 
-- **Specification conformity:** trace applicable production obligations to actual outcomes or evidenced no-code-change dispositions. Follow consumers, registrations, persistence, transitions, failure paths, and preserved behavior. [Security](security.md) owns whether controls enforce security obligations, including required permission denials; link those clauses to its assessment rather than repeating control verification. Code still checks distinct integration behavior such as correct propagation of a denial and consistency of business state after rejection. A Code-only verdict excludes control assurance and does not require the Security report to complete the Code checks.
-- **Plan conformity:** trace applicable production DES/DEC/IMP commitments to code and evidence; reverse-check for unsupported changes. Route security-control commitments to Security while checking how they integrate into production flows. A code/plan match cannot excuse a specification violation. Material deviations need planner and plan reviewer disposition; no full PASS while a material deviation within Code's scope remains unresolved.
-- Use focused existing tests, builds, and static checks where authorized and useful. Passing suites don't prove specification coverage; reading code doesn't establish runtime success. Note uninspected boundaries and use **Not assessed** when a required conclusion lacks execution evidence.
+**Focus:**
+- Follow one risky flow through the diff, from entry point to persisted effect and consumers. Ask whether a reachable input, state or failure would violate the spec even though every task is marked done.
+- A passing suite doesn't prove spec coverage, and reading code doesn't prove that it runs correctly.
+- When Security also runs, it owns permission-rule enforcement. Code still checks how a denial propagates and that the business state stays consistent.
 
-## Route and hand off
-
-Send implementation defects to the code author, design/task defects to [plan-code](../../plan-code/SKILL.md), and scope or behavior ambiguity to the owning phase of [spec](../../spec/SKILL.md). Send package/readiness discrepancies to the spec review phase. Route planned test coverage/design gaps to [plan-tests](../../plan-tests/SKILL.md), implemented-test concerns to the [Tests phase](tests.md), and security concerns to the [Security phase](security.md). A Code PASS is not test adequacy or release acceptance.
+**Owners:** `implement/production-coder` for defects, `plan/code-planner` for design gaps, and spec stages for ambiguity. Send test concerns to Tests.
